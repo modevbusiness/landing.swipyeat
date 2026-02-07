@@ -37,19 +37,19 @@ export default function AboutPage() {
     ];
 
     const milestones = [
-        { year: "2021", title: "Founded", description: "SwipyEat was born out of frustration with outdated restaurant tech. Our founders — a chef and an engineer — set out to build something better." },
-        { year: "2022", title: "First 100 Restaurants", description: "After months of iteration with early adopters, we hit our first milestone — 100 restaurants running on SwipyEat daily." },
-        { year: "2023", title: "Launched KDS & POS", description: "We expanded from a menu builder into a full restaurant operating system with our Kitchen Display System and Point of Sale." },
-        { year: "2024", title: "Global Expansion", description: "SwipyEat went international, supporting 30+ languages and multi-currency payments across 50+ countries." },
-        { year: "2025", title: "1,000+ Restaurants", description: "We crossed 1,000 active restaurants and processed over $50M in transactions through our platform." },
+        { year: "2024", title: "Founded", description: "SwipyEat was born out of frustration with outdated restaurant tech. Our founders — a chef and an engineer — set out to build something better." },
+        { year: "JULY - 2024", title: "First 100 Restaurants", description: "After months of iteration with early adopters, we hit our first milestone — 100 restaurants running on SwipyEat daily." },
+        { year: "MAR - 2025", title: "Launched KDS & POS", description: "We expanded from a menu builder into a full restaurant operating system with our Kitchen Display System and Point of Sale." },
+        { year: "OCT - 2025", title: "Global Expansion", description: "SwipyEat went international, supporting 30+ languages and multi-currency payments across 50+ countries." },
+        { year: "JUN - 2026", title: "1,000+ Restaurants", description: "We crossed 1,000 active restaurants and processed over $50M in transactions through our platform." },
         { year: "2026", title: "What's Next", description: "AI-powered analytics, predictive inventory management, and deeper integrations — the future of restaurant tech is here." },
     ];
 
     const team = [
-        { name: "Ahmed Benali", role: "Co-Founder & CEO", image: "/team-1.jpg", description: "Former head chef turned entrepreneur. 15 years in the restaurant industry." },
-        { name: "Sara Dupont", role: "Co-Founder & CTO", image: "/team-2.jpg", description: "Full-stack engineer. Previously led engineering at a food-tech startup." },
-        { name: "Youssef Amrani", role: "Head of Product", image: "/team-3.jpg", description: "Product leader with a passion for user experience and restaurant operations." },
-        { name: "Lina Petrov", role: "Head of Design", image: "/team-4.jpg", description: "Award-winning designer specializing in SaaS and consumer products." },
+        { name: "Mohamed EL KHAMLICHI", role: "Co-Founder & CEO", image: "/team-1.jpg", description: "Full-stack engineer with a passion for building scalable web applications." },
+        { name: "Mostafa OULAHYAN", role: "Co-Founder & CTO", image: "/team-2.jpg", description: "Full-stack engineer. Previously led engineering at a food-tech startup." },
+        { name: "Med Yassine EL HJOUJI", role: "Head of Product", image: "/team-3.jpg", description: "Product leader with a passion for user experience and restaurant operations." },
+        { name: "Imran CHEROUD", role: "Head of Design", image: "/team-4.jpg", description: "Award-winning designer specializing in SaaS and consumer products." },
     ];
 
     const stats = [
