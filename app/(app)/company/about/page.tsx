@@ -38,10 +38,10 @@ export default function AboutPage() {
 
     const milestones = [
         { year: "2024", title: "Founded", description: "SwipyEat was born out of frustration with outdated restaurant tech. Our founders — a chef and an engineer — set out to build something better." },
-        { year: "JULY - 2024", title: "First 100 Restaurants", description: "After months of iteration with early adopters, we hit our first milestone — 100 restaurants running on SwipyEat daily." },
-        { year: "MAR - 2025", title: "Launched KDS & POS", description: "We expanded from a menu builder into a full restaurant operating system with our Kitchen Display System and Point of Sale." },
-        { year: "OCT - 2025", title: "Global Expansion", description: "SwipyEat went international, supporting 30+ languages and multi-currency payments across 50+ countries." },
-        { year: "JUN - 2026", title: "1,000+ Restaurants", description: "We crossed 1,000 active restaurants and processed over $50M in transactions through our platform." },
+        { year: "JULY-24", title: "First 100 Restaurants", description: "After months of iteration with early adopters, we hit our first milestone — 100 restaurants running on SwipyEat daily." },
+        { year: "MAR-25", title: "Launched KDS & POS", description: "We expanded from a menu builder into a full restaurant operating system with our Kitchen Display System and Point of Sale." },
+        { year: "OCT-25", title: "Global Expansion", description: "SwipyEat went international, supporting 30+ languages and multi-currency payments across 50+ countries." },
+        { year: "JUN-26", title: "1,000+ Restaurants", description: "We crossed 1,000 active restaurants and processed over $50M in transactions through our platform." },
         { year: "2026", title: "What's Next", description: "AI-powered analytics, predictive inventory management, and deeper integrations — the future of restaurant tech is here." },
     ];
 
@@ -84,10 +84,10 @@ export default function AboutPage() {
                                 Born in the kitchen, <br /> built for the industry
                             </h2>
                             <p className="text-xl text-black/70 leading-relaxed">
-                                SwipyEat was founded by Ahmed, a head chef who spent 15 years watching orders get lost on paper tickets, and Sara, an engineer who knew there had to be a better way.
+                                SwipyEat was founded by Mohamed, a head chef & Full-stack developer who spent 3 years watching orders get lost on paper tickets, and Mostafa, an engineer who knew there had to be a better way.
                             </p>
                             <p className="text-lg text-black/60 leading-relaxed">
-                                Together, they built a prototype in Ahmed's restaurant kitchen. Within weeks, order errors dropped by 60% and service speed increased by 45%. That prototype became SwipyEat — and the rest is history.
+                                Together, they built a prototype in Mohamed's restaurant kitchen. Within weeks, order errors dropped by 60% and service speed increased by 45%. That prototype became SwipyEat — and the rest is history.
                             </p>
                             <p className="text-lg text-black/60 leading-relaxed">
                                 Today, our team of 50+ people across 8 countries is dedicated to one mission: making restaurants run smoother, faster, and smarter.
@@ -99,7 +99,7 @@ export default function AboutPage() {
                                 <p className="text-xl text-black/80 italic leading-relaxed">
                                     We didn't build SwipyEat because we wanted to start a tech company. We built it because we were tired of watching great restaurants struggle with bad tools.
                                 </p>
-                                <p className="mt-6 font-heading text-lg">Ahmed Benali</p>
+                                <p className="mt-6 font-heading text-lg">Mohamed El Khamlichi</p>
                                 <p className="text-black/60">Co-Founder & CEO</p>
                             </div>
                         </div>
@@ -153,7 +153,7 @@ export default function AboutPage() {
                         {milestones.map((milestone, i) => (
                             <div key={i} className="flex gap-6">
                                 <div className="flex flex-col items-center">
-                                    <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-heading text-sm shrink-0">
+                                    <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center font-heading text-sm shrink-0">
                                         {milestone.year}
                                     </div>
                                     {i < milestones.length - 1 && (
