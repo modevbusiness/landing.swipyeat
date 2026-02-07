@@ -198,10 +198,10 @@ export default function AboutPage() {
                             Want to join our team? We're always looking for talented people.
                         </p>
                         <Link
-                            href="/company/careers"
+                            href="mailto:contact@swipyeat.com"
                             className="inline-flex items-center gap-2 hover:gap-4 bg-primary text-white font-semibold py-3 px-8 text-lg hover:bg-primary/90 transition-all"
                         >
-                            <span>View Open Positions</span>
+                            <span>Contact us</span>
                             <ArrowRight size={20} />
                         </Link>
                     </div>

@@ -20,7 +20,7 @@ export default function Hero() {
         </div>
       </div>
       <div className='flex justify-between items-center md:p-8 p-4'>
-        <h1 className='font-mono uppercase'>Trusted by over 1,000 restaurants worldwide</h1>
+        <h1 className='font-mono uppercase md:text-2xl text-white'>Trusted by over 1,000 <br />restaurants worldwide</h1>
         <div>
           <Image src="/trusted.png" alt="Logos" width={600} height={100} />
         </div>
