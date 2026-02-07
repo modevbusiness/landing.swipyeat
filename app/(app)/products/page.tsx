@@ -141,7 +141,7 @@ export default function ProductsPage() {
             </div>
 
             {/* Quick Nav */}
-            <div className="bg-white border-b sticky top-18 z-40" id="product-nav">
+            <div className="bg-white border-b z-40" id="product-nav">
                 <div className="max-w-6xl mx-auto flex justify-center gap-2">
                     {products.map((product) => (
                         <a
@@ -213,9 +213,9 @@ export default function ProductsPage() {
                             {/* Feature Grid */}
                             <div className="mt-16" id={`${product.id}-features`}>
                                 <h3 className="text-3xl font-heading mb-8">Key Capabilities</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                                     {product.features.map((feature, j) => (
-                                        <div key={j} className="border-2 border-gray-200 rounded-lg p-6 hover:border-primary/30 hover:shadow-md transition-all">
+                                        <div key={j} className="even:bg-gray-100 p-6 transition-all">
                                             <div className="flex items-start gap-3 mb-3">
                                                 <div className="bg-primary/10 rounded-full p-1 mt-0.5">
                                                     <Check size={16} className="text-primary" />

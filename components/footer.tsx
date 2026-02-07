@@ -5,11 +5,11 @@ import Image from "next/image";
 export default function Footer() {
     const footerLinks = {
         Product: [
-            { name: "Menu Builder", href: "/menu-builder" },
-            { name: "POS System", href: "/pos-system" },
-            { name: "KDS System", href: "/kds-system" },
+            { name: "Menu Builder", href: "/products#menu-builder" },
+            { name: "POS System", href: "/products#pos-system" },
+            { name: "KDS System", href: "/products#kds-system" },
             { name: "Pricing", href: "/pricing" },
-            { name: "Features", href: "#features" }
+            { name: "Features", href: "/features" }
         ],
         Company: [
             { name: "About Us", href: "/company/about" },

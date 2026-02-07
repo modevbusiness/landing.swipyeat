@@ -120,7 +120,7 @@ export default function Header() {
                 </div>
             </Link>
             <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">Pricing</Link>
-            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="#">Docs</Link>
+            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">Docs</Link>
             <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">Contact</Link>
         </nav>
         <div className='flex items-center gap-4 flex-1 justify-end'>
