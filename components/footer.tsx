@@ -12,16 +12,13 @@ export default function Footer() {
             { name: "Features", href: "#features" }
         ],
         Company: [
-            { name: "About Us", href: "/about" },
-            { name: "Careers", href: "/careers" },
-            { name: "Blog", href: "/blog" },
-            { name: "Press", href: "/press" },
-            { name: "Contact", href: "/contact" }
+            { name: "About Us", href: "/company/about" },
+            { name: "Blog", href: "/company/blog" },
+            { name: "Contact", href: "/company/contact" }
         ],
         Resources: [
             { name: "Documentation", href: "/docs" },
             { name: "Help Center", href: "/help" },
-            { name: "API Reference", href: "/api" },
             { name: "Community", href: "/community" },
             { name: "Status", href: "/status" }
         ],
@@ -29,7 +26,6 @@ export default function Footer() {
             { name: "Privacy Policy", href: "/privacy" },
             { name: "Terms of Service", href: "/terms" },
             { name: "Cookie Policy", href: "/cookies" },
-            { name: "GDPR", href: "/gdpr" },
             { name: "Security", href: "/security" }
         ]
     };
@@ -118,7 +114,7 @@ export default function Footer() {
                     {/* Bottom Bar */}
                     <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-white/60 text-sm">
-                            © {new Date().getFullYear()} SwipeEat. All rights reserved.
+                            © {new Date().getFullYear()} SwipyEat. All rights reserved.
                         </p>
                         <p className="text-white/60 text-sm font-mono">
                             Made with love for restaurants worldwide

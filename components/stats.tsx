@@ -18,7 +18,7 @@ export default function Stats() {
         {
             value: "98%",
             label: "Customer Satisfaction",
-            description: "Of our clients would recommend SwipeEat"
+            description: "Of our clients would recommend SwipyEat"
         }
     ];
 

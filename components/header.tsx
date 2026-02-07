@@ -24,25 +24,25 @@ export default function Header() {
         {
             title: "Degital menu",
             elements: [
-                { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings." },
-                { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings." },
-                { title: "Multimedia support", description: "Enhance your menu with images and videos of your dishes, giving customers a visual representation of what you have to offer." },
+                { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.", href: "/features#digital-menu" },
+                { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings.", href: "/features#order-management" },
+                { title: "Multimedia support", description: "Enhance your menu with images and videos of your dishes, giving customers a visual representation of what you have to offer.", href: "/features#digital-menu" },
             ]
         },
         {
             title: "Online ordering",
             elements: [
-                { title: "Seamless ordering experience", description: "Provide your customers with a seamless online ordering experience. Allow them to browse your menu, customize their orders, and make secure payments with ease." },
-                { title: "Order management", description: "Efficiently manage incoming orders with our intuitive order management system. Track order status, update customers, and ensure timely delivery." },
-                { title: "Multiple payment options", description: "Offer a variety of payment options to cater to your customers' preferences, including credit cards, digital wallets, and more." },
+                { title: "Seamless ordering experience", description: "Provide your customers with a seamless online ordering experience. Allow them to browse your menu, customize their orders, and make secure payments with ease.", href: "/features#online-ordering" },
+                { title: "Order management", description: "Efficiently manage incoming orders with our intuitive order management system. Track order status, update customers, and ensure timely delivery.", href: "/features#order-management" },
+                { title: "Multiple payment options", description: "Offer a variety of payment options to cater to your customers' preferences, including credit cards, digital wallets, and more.", href: "/features#payment-processing" },
             ]
         },
         {
             title: "Table reservation",
             elements: [
-                { title: "Easy reservation system", description: "Allow customers to easily reserve tables at your restaurant through our user-friendly reservation system. Manage reservations and optimize seating arrangements." },
-                { title: "Real-time availability", description: "Provide real-time updates on table availability, allowing customers to make informed decisions when booking their reservations." },
-                { title: "Reservation management", description: "Efficiently manage reservations, track customer preferences, and ensure a smooth dining experience for your guests." },
+                { title: "Easy reservation system", description: "Allow customers to easily reserve tables at your restaurant through our user-friendly reservation system. Manage reservations and optimize seating arrangements.", href: "/features#table-reservation" },
+                { title: "Real-time availability", description: "Provide real-time updates on table availability, allowing customers to make informed decisions when booking their reservations.", href: "/features#table-reservation" },
+                { title: "Reservation management", description: "Efficiently manage reservations, track customer preferences, and ensure a smooth dining experience for your guests.", href: "/features#table-reservation" },
             ]
         },
     ]
@@ -50,25 +50,25 @@ export default function Header() {
         { 
             title: "Menu Builder", 
             elements: [
-                { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings." },
-                { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings." },
-                { title: "Multimedia support", description: "Enhance your menu with images and videos of your dishes, giving customers a visual representation of what you have to offer." },
+                { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.", href: "/products#menu-builder" },
+                { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings.", href: "/products#menu-builder" },
+                { title: "Multimedia support", description: "Enhance your menu with images and videos of your dishes, giving customers a visual representation of what you have to offer.", href: "/products#menu-builder" },
             ]
         },
         {
             title: "POS System",
             elements: [
-                { title: "Streamlined order processing", description: "Our Point of Sale (POS) system streamlines order processing, allowing your staff to quickly and accurately take orders, manage payments, and track sales." },
-                { title: "Inventory management", description: "Keep track of your inventory in real-time, ensuring that you never run out of essential ingredients and supplies." },
-                { title: "Sales analytics", description: "Gain valuable insights into your sales performance with our comprehensive analytics tools, helping you make informed business decisions." },
+                { title: "Streamlined order processing", description: "Our Point of Sale (POS) system streamlines order processing, allowing your staff to quickly and accurately take orders, manage payments, and track sales.", href: "/products#pos-system" },
+                { title: "Inventory management", description: "Keep track of your inventory in real-time, ensuring that you never run out of essential ingredients and supplies.", href: "/products#pos-system" },
+                { title: "Sales analytics", description: "Gain valuable insights into your sales performance with our comprehensive analytics tools, helping you make informed business decisions.", href: "/products#pos-system" },
             ]
         },
         {
             title: "KDS System",
             elements: [
-                { title: "Efficient order management", description: "Streamline your kitchen operations with our Kitchen Display System (KDS). Manage and prioritize orders, track preparation times, and ensure smooth communication between the front and back of house." },
-                { title: "Real-time updates", description: "Receive real-time updates on order status, allowing your kitchen staff to stay informed and deliver orders promptly." },
-                { title: "Customizable interface", description: "Customize the KDS interface to fit your kitchen workflow, ensuring that your staff can easily navigate and manage orders." },
+                { title: "Efficient order management", description: "Streamline your kitchen operations with our Kitchen Display System (KDS). Manage and prioritize orders, track preparation times, and ensure smooth communication between the front and back of house.", href: "/products#kds-system" },
+                { title: "Real-time updates", description: "Receive real-time updates on order status, allowing your kitchen staff to stay informed and deliver orders promptly.", href: "/products#kds-system" },
+                { title: "Customizable interface", description: "Customize the KDS interface to fit your kitchen workflow, ensuring that your staff can easily navigate and manage orders.", href: "/products#kds-system" },
             ]
         }
     ]
@@ -79,7 +79,7 @@ export default function Header() {
             <span className='font-bold text-lg'>SwipyEat</span>
         </Link>
         <nav className='flex flex-1 items-center justify-center'>
-            <Link className='group w-max flex items-center font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="#">
+            <Link className='group w-max flex items-center font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
                 <span>Feautures </span><ChevronDown className='inline-block w-4 h-4 ml-1' />
                 <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
                     {features.map((feature) => (
@@ -87,9 +87,11 @@ export default function Header() {
                             <h3 className='font-medium text-white text-xl'>{feature.title}</h3>
                             <ul className='mt-2 flex flex-col gap-2'>
                                 {feature.elements.map((element) => (
-                                    <li key={element.title} className='text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
-                                        <h4 className='font-medium'>{element.title}</h4>
-                                        <p className='opacity-60 line-clamp-1'>{element.description}</p>
+                                    <li key={element.title}>
+                                        <Link href={element.href} className='block text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
+                                            <h4 className='font-medium'>{element.title}</h4>
+                                            <p className='opacity-60 line-clamp-1'>{element.description}</p>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -97,7 +99,7 @@ export default function Header() {
                     ))}
                 </div>
             </Link>
-            <Link className='font-medium w-max flex items-center text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border group' href="#">
+            <Link className='font-medium w-max flex items-center text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border group' href="/products">
                 <span>Products</span><ChevronDown className='inline-block w-4 h-4 ml-1' />
                 <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
                     {products.map((product) => (
@@ -105,9 +107,11 @@ export default function Header() {
                             <h3 className='font-medium text-white text-xl'>{product.title}</h3>
                             <ul className='mt-2 flex flex-col gap-2'>
                                 {product.elements.map((element) => (
-                                    <li key={element.title} className='text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
-                                        <h4 className='font-medium'>{element.title}</h4>
-                                        <p className='opacity-60 line-clamp-1'>{element.description}</p>
+                                    <li key={element.title}>
+                                        <Link href={element.href} className='block text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
+                                            <h4 className='font-medium'>{element.title}</h4>
+                                            <p className='opacity-60 line-clamp-1'>{element.description}</p>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -115,9 +119,9 @@ export default function Header() {
                     ))}
                 </div>
             </Link>
-            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="#">Pricing</Link>
+            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">Pricing</Link>
             <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="#">Docs</Link>
-            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="#">Contact</Link>
+            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">Contact</Link>
         </nav>
         <div className='flex items-center gap-4 flex-1 justify-end'>
             <SignedOut>

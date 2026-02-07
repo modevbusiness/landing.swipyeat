@@ -12,7 +12,7 @@ export default function FinalCTA() {
                     Start streamlining your restaurant today
                 </h2>
                 <p className="text-xl text-black/70 max-w-2xl mx-auto mb-8">
-                    Join over 1,000 restaurants worldwide that have already improved their operations with SwipeEat. Set up takes less than 10 minutes.
+                    Join over 1,000 restaurants worldwide that have already improved their operations with SwipyEat. Set up takes less than 10 minutes.
                 </p>
                 <Link 
                     className="inline-flex items-center justify-center gap-2 hover:gap-4 bg-primary text-white font-semibold py-4 px-16 text-xl hover:bg-primary/90 transition-all"

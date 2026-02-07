@@ -18,7 +18,7 @@ export default function Testimonials() {
             name: "Sarah Mitchell",
             role: "Owner",
             restaurant: "The Garden Bistro",
-            content: "SwipeEat has completely transformed how we operate. Our kitchen is more organized, our waiters are more efficient, and our customers are happier. The real-time order system eliminated so many errors.",
+            content: "SwipyEat has completely transformed how we operate. Our kitchen is more organized, our waiters are more efficient, and our customers are happier. The real-time order system eliminated so many errors.",
             rating: 5,
             image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
         },
@@ -42,7 +42,7 @@ export default function Testimonials() {
             name: "David Chen",
             role: "Operations Director",
             restaurant: "Pacific Fusion",
-            content: "Managing multiple locations is so much easier with SwipeEat. The analytics and reporting features give us insights we never had before. We can make data-driven decisions to improve our service.",
+            content: "Managing multiple locations is so much easier with SwipyEat. The analytics and reporting features give us insights we never had before. We can make data-driven decisions to improve our service.",
             rating: 5,
             image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
         }

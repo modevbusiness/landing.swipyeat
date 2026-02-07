@@ -13,7 +13,7 @@ export default function Feautures() {
         {
             title: "Real-Time Order Management",
             description: "Our system allows waiters to take orders directly on their devices, which are instantly sent to the kitchen. This real-time communication ensures that orders are processed quickly and accurately, reducing wait times and improving customer satisfaction.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361"
+            image: "/orders.png"
         },
         {
             title: "Kitchen Display System (KDS)",
