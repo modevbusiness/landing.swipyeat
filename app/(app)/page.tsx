@@ -1,3 +1,5 @@
+'use client';
+
 import Hero from "@/components/hero";
 import Products from "@/components/products";
 import Feautures from "@/components/feautures";
@@ -6,8 +8,22 @@ import Pricing from "@/components/pricing";
 import Stats from "@/components/stats";
 import Testimonials from "@/components/testimonials";
 import FinalCTA from "@/components/final-cta";
+import WaitlistForm from "@/components/waitlist";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [showWaitlist, setShowWaitlist] = useState(false);
+  useEffect(() => {
+    const waitlistShown = localStorage.getItem('waitlistShown');
+    if (!waitlistShown) {
+      setShowWaitlist(true);
+    }
+  }, []);
+
+  const handleClose = () => {
+    localStorage.setItem('waitlistShown', 'true');
+    setShowWaitlist(false);
+  };
   return (
     <div>
       <Hero />
@@ -22,6 +38,7 @@ export default function Home() {
       <Stats />
       <Testimonials />
       <FinalCTA />
+      {showWaitlist && <WaitlistForm  onClose={() => setShowWaitlist(false)} onSubmit={() => handleClose()} />}
     </div>
   );
 }
