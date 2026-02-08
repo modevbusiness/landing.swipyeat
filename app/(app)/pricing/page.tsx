@@ -214,7 +214,7 @@ export default function PricingPage() {
                         </table>
                     </div>
 
-                    <div className="flex justify-center gap-6 mt-12">
+                    <div className="flex flex-col md:flex-row justify-center gap-6 mt-12">
                         {pricingTiers.map((tier) => (
                             <Link
                                 key={tier.name}

@@ -142,7 +142,7 @@ export default function ProductsPage() {
 
             {/* Quick Nav */}
             <div className="bg-white border-b z-40" id="product-nav">
-                <div className="max-w-6xl mx-auto flex justify-center gap-2">
+                <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center gap-2">
                     {products.map((product) => (
                         <a
                             key={product.id}

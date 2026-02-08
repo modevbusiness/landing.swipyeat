@@ -123,12 +123,14 @@ export default function SecurityPage() {
             </div>
 
             {/* Security Features */}
-            <div className="p-8 md:p-16" id="security-features">
+            <div className="p-0 md:p-16" id="security-features">
                 <div className="max-w-6xl mx-auto">
-                    <h1 className="text-primary text-xl font-mono border-b w-max">Security Infrastructure</h1>
-                    <h2 className="text-5xl font-heading py-6">
-                        Enterprise-grade security <br /> for every restaurant
-                    </h2>
+                    <div className="p-8 md:p-0">
+                        <h1 className="text-primary text-xl font-mono border-b w-max">Security Infrastructure</h1>
+                        <h2 className="text-5xl font-heading py-6">
+                            Enterprise-grade security <br /> for every restaurant
+                        </h2>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
                         {securityFeatures.map((feature, i) => (
@@ -177,9 +179,9 @@ export default function SecurityPage() {
                         How we protect <br /> your data every day
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 mt-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4">
                         {practices.map((practice) => (
-                            <div key={practice.id} id={practice.id} className="p-6">
+                            <div key={practice.id} id={practice.id}>
                                 <h3 className="text-2xl font-heading mb-4">{practice.title}</h3>
                                 <ul className="space-y-3">
                                     {practice.items.map((item, j) => (

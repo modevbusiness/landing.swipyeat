@@ -224,12 +224,14 @@ export default function FeaturesPage() {
             {/* All Features Grid */}
             <div className="py-8 md:py-16" id="features-overview">
                 <div className="max-w-6xl mx-auto">
-                    <h1 className="text-primary text-xl font-mono border-b w-max">
-                        Overview
-                    </h1>
-                    <h2 className="text-5xl font-heading py-6">
-                        All features at a glance
-                    </h2>
+                    <div className="px-8 md-p-0">
+                        <h1 className="text-primary text-xl font-mono border-b w-max">
+                            Overview
+                        </h1>
+                        <h2 className="text-5xl font-heading py-6">
+                            All features at a glance
+                        </h2>
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
                         {featureCategories.map((cat) => (
