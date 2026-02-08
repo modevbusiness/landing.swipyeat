@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Feautures() {
     const features = [
@@ -50,14 +51,15 @@ export default function Feautures() {
                         <AccordionItem value={`item-${i}`} key={i} className="border-b cursor-pointer">
                             <AccordionTrigger className="text-left text-2xl font-heading cursor-pointer no-underline hover:no-underline">{feature.title}</AccordionTrigger>
                             <AccordionContent className="text-lg text-black/70">
-                                {feature.description}
+                                <p>{feature.description}</p>
+                                <Image src={feature.image} alt={feature.title} width={600} height={400} className="w-full h-full md:hidden object-cover rounded-md bg-gray-200" />
                             </AccordionContent>
                         </AccordionItem>
                     ))}
                 </Accordion>
             </div>
             <div className="flex-1 h-full w-full bg-gray-200 rounded-md md:block hidden">
-                <img src={features[selectedFeature].image} alt={features[selectedFeature].title} className="w-full h-full object-cover rounded" />
+                <Image src={features[selectedFeature].image} alt={features[selectedFeature].title} width={600} height={400} className="w-full h-full object-cover rounded bg-gray-100" />
             </div>
         </div>
     )

@@ -13,7 +13,7 @@ export default function Home() {
       <Hero />
       <div className="p-8" id="why-us">
         <h1 className="text-primary text-xl font-mono py-1 w-max border-b">Why SwipyEat?</h1>
-        <h1 className="text-black text-5xl font-heading py-4">"SwipyEat brings waiters, kitchen staff, and management together in one real-time system to streamline ordering, improve kitchen flow, and keep service running smoothly."</h1>
+        <h1 className="text-black text-2xl md:text-5xl font-heading py-4">"SwipyEat brings waiters, kitchen staff, and management together in one real-time system to streamline ordering, improve kitchen flow, and keep service running smoothly."</h1>
       </div>
       <Feautures />
       <HowItWorks />

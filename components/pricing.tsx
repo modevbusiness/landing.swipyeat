@@ -121,11 +121,9 @@ export default function Pricing() {
                     <span className={`text-lg font-semibold ${isYearly ? 'text-primary' : 'text-black/60'}`}>
                         Yearly
                     </span>
-                    {isYearly && (
-                        <span className="bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
-                            Save 10%
-                        </span>
-                    )}
+                    <span className="bg-primary hidden md:block text-white text-sm font-semibold px-3 py-1 rounded-full">
+                        Save 10%
+                    </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

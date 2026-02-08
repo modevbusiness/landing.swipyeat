@@ -3,12 +3,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Menu, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function Header() {
     const [isScrollingDown, setIsScrollingDown] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -73,12 +74,12 @@ export default function Header() {
         }
     ]
   return (
-    <header className={`w-full bg-primary text-white px-4 flex sticky top-0 z-50 items-center ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-300`}>
-        <Link href="/" className='flex flex-1 items-center gap-1'>
+    <header className={`w-full bg-primary text-white px-4 py-4 md:py-0 flex sticky top-0 z-50 items-center ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-300`}>
+        <Link onClick={() => setIsMenuOpen(false)} href="/" className='flex flex-1 items-center gap-1'>
             <Image src="/logo.svg" alt="Logo" width={50} height={50} />
             <span className='font-bold text-lg'>SwipyEat</span>
         </Link>
-        <nav className='flex flex-1 items-center justify-center'>
+        <nav className='md:flex hidden flex-1 items-center justify-center'>
             <Link className='group w-max flex items-center font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
                 <span>Feautures </span><ChevronDown className='inline-block w-4 h-4 ml-1' />
                 <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
@@ -123,7 +124,7 @@ export default function Header() {
             <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">Docs</Link>
             <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">Contact</Link>
         </nav>
-        <div className='flex items-center gap-4 flex-1 justify-end'>
+        <div className='md:flex hidden items-center gap-4 flex-1 justify-end'>
             <SignedOut>
                 <Link className='text-white font-medium px-4 py-2' href="/sign-in">Sign in</Link>
                 <Link className='bg-white text-primary font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
@@ -132,6 +133,35 @@ export default function Header() {
                 <Link className='bg-white text-primary font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">Dashboard</Link>
             </SignedIn>
         </div>
+        <div onClick={() => setIsMenuOpen(prev => !prev)} className='md:hidden'>
+                <Menu className='w-6 h-6' />
+            </div>
+        {isMenuOpen && (
+            <div className='absolute top-full left-0 w-full h-screen bg-primary text-white flex flex-col items-center py-4 md:hidden'>
+                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
+                    <span>Feautures </span><ArrowRight className='inline-block' />
+                </Link>
+                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/products">
+                    <span>Products </span><ArrowRight className='inline-block' />
+                </Link>
+                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">
+                    <span>Pricing </span><ArrowRight className='inline-block' />
+                </Link>
+                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">
+                    <span>Docs </span><ArrowRight className='inline-block' />
+                </Link>
+                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">
+                    <span>Contact </span><ArrowRight className='inline-block' />
+                </Link>
+                <SignedOut>
+                    <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/sign-in">Sign in</Link>
+                    <Link onClick={() => setIsMenuOpen(prev => !prev)} className='font-medium flex items-center justify-between text-xl w-full bg-white text-primary hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/sign-up">Get Started</Link>
+                </SignedOut>
+                <SignedIn>
+                    <Link onClick={() => setIsMenuOpen(prev => !prev)} className='font-medium flex items-center justify-between text-xl w-full bg-white text-primary hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/dashboard">Dashboard</Link>
+                </SignedIn>
+            </div>
+        )}
     </header>
   )
 }
