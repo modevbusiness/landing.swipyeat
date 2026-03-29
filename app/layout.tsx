@@ -16,7 +16,7 @@ export const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "SwipyEat - Streamline Your Restaurant Operations",
+  title: "SwipyEat - Streamline your Restaurant Operations",
   icons: "/logo.svg",
   description: "SwipyEat is a comprehensive restaurant management system designed to optimize operations, enhance customer experience, and boost profitability. Our platform offers real-time order management, a kitchen display system, and powerful management tools to help restaurant owners and staff run their businesses more efficiently. With SwipyEat, you can reduce wait times, improve communication between front and back of house, and make data-driven decisions to grow your restaurant.",
 };
