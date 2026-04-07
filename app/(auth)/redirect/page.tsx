@@ -3,16 +3,42 @@ import { currentUser } from "@clerk/nextjs/server";
 
 export default async function RedirectPage() {
   const user = await currentUser();
-  const role = user?.publicMetadata.role as string | undefined;
-  // if(!role || !user) {
-  //   redirect("/get-started");
-  // }
 
+  if (!user) {
+    redirect("/sign-in");
+  }
 
-  // if(role === "admin") {
-  //   redirect("https://admin.swipyeat.com");
-  // } else if(role === "waiter" || role === "kitchen-staff") {
-  //   redirect("/dashboard");
-  // }
-  redirect("/dashboard");
+  // Check if onboarding is completed
+  const onboardingCompleted = user.unsafeMetadata?.onboardingCompleted;
+  if (!onboardingCompleted) {
+    redirect("/onboarding");
+  }
+
+  const role = user.unsafeMetadata?.role as string | undefined;
+
+  if (!role) {
+    redirect("/onboarding");
+  }
+
+  // Redirect based on role
+  const ADMIN_URL = process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3001";
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3002";
+
+  switch (role) {
+    case "restaurant_admin":
+    case "manager":
+      // Redirect to admin dashboard
+      redirect(ADMIN_URL);
+      break;
+
+    case "staff":
+    case "waiter":
+    case "kitchen_staff":
+      // Redirect to app
+      redirect(APP_URL);
+      break;
+
+    default:
+      redirect("/onboarding");
+  }
 }
