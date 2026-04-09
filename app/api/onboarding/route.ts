@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { createClient } from "@supabase/supabase-js";
+import { verifyInviteToken } from "@/lib/invite";
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -17,19 +18,32 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { role, restaurantName, address, city, phone, email: contactEmail, name, logo_url } = body;
+    const { role: bodyRole, restaurantName, address, city, phone, email: contactEmail, name, logo_url, inviteToken } = body;
+    
+    let role = bodyRole;
+    let restaurantId = null;
+    let invitationRole = null;
 
-    // Validate role
-    // Only two roles allowed during onboarding now: "restaurant_admin" and "staff"
-    const validRoles = ["restaurant_admin", "staff"];
-    if (!validRoles.includes(role)) {
-      return NextResponse.json({ error: "Invalid role" }, { status: 400 });
+    // Handle invitation token if present
+    if (inviteToken) {
+      const payload = await verifyInviteToken(inviteToken);
+      if (payload) {
+        // Security check: email must match
+        if (payload.email.toLowerCase() !== user.emailAddresses[0]?.emailAddress.toLowerCase()) {
+          return NextResponse.json({ error: "Email mismatch with invitation" }, { status: 400 });
+        }
+        
+        // Use data from invitation
+        role = "staff"; // Ensure role is staff path
+        restaurantId = payload.restaurantId;
+        invitationRole = payload.role;
+      } else {
+        return NextResponse.json({ error: "Invalid or expired invitation token" }, { status: 400 });
+      }
     }
 
-    let restaurantId = null;
-
     // If restaurant_admin, create a new restaurant
-    if (role === "restaurant_admin") {
+    if (role === "restaurant_admin" && !restaurantId) {
       if (!restaurantName || !address) {
         return NextResponse.json(
           { error: "Restaurant name and address are required for admins" },
@@ -109,7 +123,7 @@ export async function POST(request: NextRequest) {
       name: name,
       email: contactEmail || user.emailAddresses[0]?.emailAddress,
       avatar_url: user.imageUrl || null,
-      role: role === "staff" ? "waiter" : "restaurant_admin", // Default staff to waiter until accepted by admin
+      role: role === "staff" ? invitationRole || "waiter" : "restaurant_admin", 
       is_active: true,
     });
 
@@ -123,7 +137,7 @@ export async function POST(request: NextRequest) {
           .from("users")
           .update({
             restaurant_id: restaurantId,
-            role: role === "staff" ? "waiter" : "restaurant_admin",
+            role: role === "staff" ? invitationRole || "waiter" : "restaurant_admin",
             name: name,
             avatar_url: user.imageUrl || null,
           })

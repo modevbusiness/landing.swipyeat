@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { Store, Users, MapPin, Building2, Phone, Mail, Link as LinkIcon, Loader2, ArrowRight, ArrowLeft, Image as ImageIcon, Upload } from "lucide-react";
+import { Store, Users, MapPin, Building2, Phone, Mail, Link as LinkIcon, Loader2, ArrowRight, ArrowLeft, Image as ImageIcon, Upload, XCircle } from "lucide-react";
+import { useEffect } from "react";
+import { checkInviteAction, clearInviteCookie } from "@/app/actions/invite";
 
 type UserRole = "restaurant_admin" | "staff";
 
@@ -34,6 +36,30 @@ export default function OnboardingPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState("");
+  const [inviteData, setInviteData] = useState<any>(null);
+  const [isCheckingInvite, setIsCheckingInvite] = useState(true);
+
+  useEffect(() => {
+    const checkInvite = async () => {
+      try {
+        const data = await checkInviteAction();
+        if (data) {
+          setInviteData(data);
+          if (data.emailMatch) {
+            setSelectedRole("staff");
+            setStep(2); // Skip role selection
+          } else {
+            setError(`This invitation was sent to ${data.email}, but you are signed in as ${data.userEmail}. Please sign in with the correct email.`);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to check invite:", err);
+      } finally {
+        setIsCheckingInvite(false);
+      }
+    };
+    checkInvite();
+  }, []);
 
   const roles = [
     {
@@ -138,8 +164,13 @@ export default function OnboardingPage() {
 
     setError("");
     
-    if (selectedRole === "staff" && !invitationLink.trim()) {
+    if (selectedRole === "staff" && !invitationLink.trim() && !inviteData?.token) {
       setError("Please enter your invitation link.");
+      return;
+    }
+
+    if (inviteData && !inviteData.emailMatch) {
+      setError(`Email mismatch. This invite is for ${inviteData.email}.`);
       return;
     }
 
@@ -171,6 +202,7 @@ export default function OnboardingPage() {
         logo_url: logoUrl,
         userId: user?.id,
         name: user?.fullName || user?.firstName || "User",
+        inviteToken: inviteData?.token || null,
       };
 
       const response = await fetch("/api/onboarding", {
@@ -181,6 +213,11 @@ export default function OnboardingPage() {
 
       if (!response.ok) {
         throw new Error("Failed to complete onboarding.");
+      }
+
+      // 4. Clear invite cookie if successful
+      if (inviteData?.token) {
+        await clearInviteCookie();
       }
 
       // 4. Redirect mapped in middleware/redirects
@@ -209,6 +246,13 @@ export default function OnboardingPage() {
           </div>
         )}
 
+        {isCheckingInvite && (
+          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center space-y-4">
+            <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            <p className="text-sm font-medium text-muted-foreground italic">Verifying your invitation...</p>
+          </div>
+        )}
+
         <div className="text-center pt-4">
           <h1 className="text-3xl font-extrabold text-foreground tracking-tight sm:text-4xl mb-2 font-heading">
             {step === 1 && "Welcome to SwipyEat"}
@@ -225,7 +269,8 @@ export default function OnboardingPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-medium text-center animate-in fade-in zoom-in-95">
+          <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-medium text-center animate-in fade-in zoom-in-95 flex items-center justify-center gap-2">
+            <XCircle className="w-4 h-4 shrink-0" />
             {error}
           </div>
         )}
@@ -416,28 +461,53 @@ export default function OnboardingPage() {
           {/* STEP 2: STAFF (Join Workspace) */}
           {step === 2 && selectedRole === "staff" && (
             <div className="animate-in fade-in slide-in-from-right-4 duration-500 bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 space-y-6">
-              <div>
-                <label htmlFor="invitationLink" className="block text-sm font-semibold text-foreground mb-1.5">
-                  Invitation Link <span className="text-primary">*</span>
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <LinkIcon className="h-5 w-5 text-gray-400" />
+              {inviteData?.emailMatch ? (
+                <div className="space-y-4">
+                   <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-xl flex items-start gap-3">
+                    <div className="bg-green-100 p-1.5 rounded-lg">
+                      <Users className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-sm">Invitation Validated!</h4>
+                      <p className="text-xs text-green-600 opacity-90 mt-0.5">
+                        You've been invited to join a restaurant. Click "Complete Setup" below to join your team.
+                      </p>
+                    </div>
                   </div>
-                  <input
-                    type="url"
-                    id="invitationLink"
-                    value={invitationLink}
-                    onChange={(e) => setInvitationLink(e.target.value)}
-                    placeholder="https://swipyeat.com/join/..."
-                    className="block w-full pl-10 pr-3 py-3 border border-input rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-foreground placeholder-muted-foreground sm:text-sm bg-background transition-colors"
-                    required
-                  />
+                  <div className="p-4 border border-gray-200 rounded-xl bg-white flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-primary font-bold">
+                       {inviteData.role?.[0].toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider font-bold">Role Assigned</p>
+                      <p className="text-lg font-bold text-foreground capitalize">{inviteData.role}</p>
+                    </div>
+                  </div>
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground">
-                  Note: This is a demo field and won't be validated rigorously right now.
-                </p>
-              </div>
+              ) : (
+                <div>
+                  <label htmlFor="invitationLink" className="block text-sm font-semibold text-foreground mb-1.5">
+                    Invitation Link <span className="text-primary">*</span>
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <LinkIcon className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="url"
+                      id="invitationLink"
+                      value={invitationLink}
+                      onChange={(e) => setInvitationLink(e.target.value)}
+                      placeholder="https://swipyeat.com/join/..."
+                      className="block w-full pl-10 pr-3 py-3 border border-input rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-foreground placeholder-muted-foreground sm:text-sm bg-background transition-colors"
+                      required
+                    />
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Note: This is a demo field and won't be validated rigorously right now.
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
