@@ -3,19 +3,27 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { Store, Users, MapPin, Building2, Phone, Mail, Link as LinkIcon, Loader2, ArrowRight, ArrowLeft, Image as ImageIcon, Upload, XCircle } from "lucide-react";
+import { Store, Users, MapPin, Building2, Phone, Mail, Link as LinkIcon, Loader2, ArrowRight, ArrowLeft, Image as ImageIcon, Upload, XCircle, CreditCard, Check, Sparkles, Crown, Zap } from "lucide-react";
 import { useEffect } from "react";
 import { checkInviteAction, clearInviteCookie } from "@/app/actions/invite";
+import { createClient } from "@/lib/supabase/client";
 
 type UserRole = "restaurant_admin" | "staff";
 
 export default function OnboardingPage() {
   const { user } = useUser();
   const router = useRouter();
+  const supabase = createClient();
   
   const [step, setStep] = useState(1);
   const [lastStepTime, setLastStepTime] = useState(Date.now());
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+
+  // Plan selection (Step 4)
+  const [selectedPlan, setSelectedPlan] = useState<'free_trial' | 'pro' | 'unlimited'>('free_trial');
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+  const [dbPlans, setDbPlans] = useState<any[]>([]);
+  const [isLoadingPlans, setIsLoadingPlans] = useState(false);
   
   // Restaurant fields (Step 2)
   const [restaurantName, setRestaurantName] = useState("");
@@ -60,6 +68,32 @@ export default function OnboardingPage() {
     };
     checkInvite();
   }, []);
+
+  // Fetch plans from DB when reaching step 4
+  useEffect(() => {
+    if (step === 4 && dbPlans.length === 0) {
+      fetchPlans();
+    }
+  }, [step]);
+
+  const fetchPlans = async () => {
+    setIsLoadingPlans(true);
+    try {
+      const { data: plans, error: planError } = await supabase
+        .from("subscription_plans")
+        .select("*")
+        .eq("is_active", true)
+        .order("price_monthly", { ascending: true });
+
+      if (plans && !planError) {
+        setDbPlans(plans);
+      }
+    } catch (err) {
+      console.error("Failed to fetch plans:", err);
+    } finally {
+      setIsLoadingPlans(false);
+    }
+  };
 
   const roles = [
     {
@@ -203,6 +237,8 @@ export default function OnboardingPage() {
         userId: user?.id,
         name: user?.fullName || user?.firstName || "User",
         inviteToken: inviteData?.token || null,
+        selectedPlan: selectedRole === "restaurant_admin" ? selectedPlan : "free_trial",
+        billingCycle: selectedRole === "restaurant_admin" ? billingCycle : "monthly",
       };
 
       const response = await fetch("/api/onboarding", {
@@ -215,12 +251,38 @@ export default function OnboardingPage() {
         throw new Error("Failed to complete onboarding.");
       }
 
+      const data = await response.json();
+
       // 4. Clear invite cookie if successful
       if (inviteData?.token) {
         await clearInviteCookie();
       }
 
-      // 4. Redirect mapped in middleware/redirects
+      // 5. If paid plan selected, redirect to Stripe Checkout
+      if (selectedRole === "restaurant_admin" && selectedPlan !== "free_trial" && data.restaurantId) {
+        const stripeRes = await fetch("/api/stripe/create-checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            restaurantId: data.restaurantId,
+            planType: selectedPlan,
+            billingCycle,
+            email: email || user?.primaryEmailAddress?.emailAddress,
+          }),
+        });
+
+        if (!stripeRes.ok) {
+          throw new Error("Failed to create payment session.");
+        }
+
+        const { url } = await stripeRes.json();
+        if (url) {
+          window.location.href = url;
+          return;
+        }
+      }
+
+      // 6. For free trial or staff, redirect normally
       router.push("/redirect");
     } catch (err) {
       setError("Something went wrong. Please try again later.");
@@ -230,7 +292,7 @@ export default function OnboardingPage() {
   };
 
   // Determine Max Steps
-  const maxSteps = selectedRole === "staff" ? 2 : 3;
+  const maxSteps = selectedRole === "staff" ? 2 : 4;
 
   return (
     <div className="min-h-screen bg-gray-50/50 flex py-12 px-4 sm:px-6 lg:px-8 font-inter">
@@ -258,12 +320,14 @@ export default function OnboardingPage() {
             {step === 1 && "Welcome to SwipyEat"}
             {step === 2 && selectedRole === "restaurant_admin" && "Restaurant Info"}
             {step === 3 && selectedRole === "restaurant_admin" && "Contact & Branding"}
+            {step === 4 && selectedRole === "restaurant_admin" && "Choose Your Plan"}
             {step === 2 && selectedRole === "staff" && "Join Workspace"}
           </h1>
           <p className="text-lg text-muted-foreground">
             {step === 1 && "Tell us how you'll be using the platform."}
             {step === 2 && selectedRole === "restaurant_admin" && "Let's set up the basics for your restaurant."}
             {step === 3 && selectedRole === "restaurant_admin" && "Add how customers can reach you and upload your logo."}
+            {step === 4 && selectedRole === "restaurant_admin" && "Select a subscription plan to get started."}
             {step === 2 && selectedRole === "staff" && "Paste the invitation link provided by your manager."}
           </p>
         </div>
@@ -458,6 +522,159 @@ export default function OnboardingPage() {
             </div>
           )}
 
+          {/* STEP 4: PLAN SELECTION (Restaurant Admin Only) */}
+          {step === 4 && selectedRole === "restaurant_admin" && (
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500 space-y-6">
+              {/* Billing Cycle Toggle */}
+              <div className="flex items-center justify-center gap-4">
+                <span className={`text-sm font-semibold transition-colors ${billingCycle === 'monthly' ? 'text-foreground' : 'text-muted-foreground'}`}>Monthly</span>
+                <button
+                  type="button"
+                  onClick={() => setBillingCycle(prev => prev === 'monthly' ? 'yearly' : 'monthly')}
+                  className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${billingCycle === 'yearly' ? 'bg-primary' : 'bg-gray-300'}`}
+                >
+                  <span className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform ${billingCycle === 'yearly' ? 'translate-x-6' : 'translate-x-1'}`} />
+                </button>
+                <span className={`text-sm font-semibold transition-colors ${billingCycle === 'yearly' ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Yearly <span className="text-green-600 text-xs font-bold ml-1 bg-green-50 px-1.5 py-0.5 rounded-full">Save 17%</span>
+                </span>
+              </div>
+
+              {/* Plan Cards - Dynamic from DB */}
+              {isLoadingPlans ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                </div>
+              ) : (
+                <div className={`grid grid-cols-1 ${dbPlans.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-6`}>
+                  {dbPlans.map((plan) => {
+                    const isSelected = selectedPlan === plan.plan_type;
+                    const isFree = plan.plan_type === 'free_trial';
+                    const isPro = plan.plan_type === 'pro';
+                    const isUnlimited = plan.plan_type === 'unlimited';
+
+                    // Plan icon mapping
+                    const PlanIcon = isFree ? Sparkles : isUnlimited ? Zap : Crown;
+                    
+                    // Price display
+                    const displayPrice = isFree 
+                      ? '0' 
+                      : billingCycle === 'yearly' 
+                        ? Math.round(plan.price_yearly / 12) 
+                        : plan.price_monthly;
+
+                    // Features: try to parse from DB or use defaults
+                    let features: string[] = [];
+                    if (plan.features) {
+                      try {
+                        const parsed = typeof plan.features === 'string' ? JSON.parse(plan.features) : plan.features;
+                        if (Array.isArray(parsed)) {
+                          features = parsed;
+                        }
+                      } catch {
+                        features = [];
+                      }
+                    }
+                    
+                    // Fallback features based on plan limits
+                    if (!features || features.length === 0) {
+                      if (isFree) {
+                        features = [
+                          `Up to ${plan.max_tables || 10} tables`,
+                          'Basic menu management',
+                          'Order management',
+                          `Up to ${plan.max_staff || 3} staff members`,
+                        ];
+                      } else if (isPro) {
+                        features = [
+                          `Up to ${plan.max_tables || 50} tables`,
+                          'Full menu management',
+                          'Advanced analytics & reports',
+                          `Up to ${plan.max_staff || 50} staff members`,
+                          'Priority support',
+                          'QR code generation',
+                        ];
+                      } else if (isUnlimited) {
+                        features = [
+                          'Unlimited tables',
+                          'Full menu management',
+                          'Advanced analytics & reports',
+                          'Unlimited staff members',
+                          'Priority support',
+                          'QR code generation',
+                          'Custom branding',
+                          'API access',
+                        ];
+                      }
+                    }
+
+                    // Determine recommended plan
+                    const isRecommended = isPro || (isUnlimited && dbPlans.length <= 2);
+
+                    return (
+                      <button
+                        key={plan.id}
+                        type="button"
+                        onClick={() => setSelectedPlan(plan.plan_type)}
+                        className={`relative flex flex-col p-6 border-2 rounded-2xl transition-all duration-200 text-left ${
+                          isSelected
+                            ? 'border-primary bg-primary/5 ring-1 ring-primary/10 shadow-sm'
+                            : 'border-gray-200 hover:border-primary/30 hover:bg-gray-50'
+                        }`}
+                      >
+                        {isRecommended && (
+                          <div className="absolute -top-3 right-4">
+                            <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                              {isUnlimited ? 'Best Value' : 'Recommended'}
+                            </span>
+                          </div>
+                        )}
+                        <div className={`inline-flex items-center justify-center p-3 rounded-xl mb-4 ${isSelected ? 'bg-primary text-white' : 'bg-gray-100 text-muted-foreground'}`}>
+                          <PlanIcon className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-lg font-bold text-foreground mb-1">{plan.name}</h3>
+                        <div className="mb-3">
+                          <span className="text-3xl font-extrabold text-foreground">{displayPrice} MAD</span>
+                          <span className="text-muted-foreground text-sm ml-1">
+                            {isFree ? `/ ${plan.trial_days || 14} days` : '/ month'}
+                          </span>
+                        </div>
+                        {!isFree && billingCycle === 'yearly' && (
+                          <p className="text-xs text-green-600 font-semibold mb-2">
+                            Billed {plan.price_yearly} MAD/year (save {Math.round((plan.price_monthly * 12) - plan.price_yearly)} MAD)
+                          </p>
+                        )}
+                        <p className="text-sm text-muted-foreground mb-4">
+                          {plan.description || (isFree 
+                            ? 'Try everything free. No credit card required.' 
+                            : `Everything you need to run your restaurant digitally.`
+                          )}
+                        </p>
+                        <ul className="space-y-2 text-sm text-muted-foreground mt-auto">
+                          {features.map((feature: string, idx: number) => (
+                            <li key={idx} className="flex items-center gap-2">
+                              <Check className="w-4 h-4 text-green-500 shrink-0" /> {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {selectedPlan !== 'free_trial' && (
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3 animate-in fade-in zoom-in-95 duration-300">
+                  <CreditCard className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-blue-800">Secure Payment via Stripe</p>
+                    <p className="text-xs text-blue-600 mt-0.5">You&apos;ll be redirected to Stripe&apos;s secure checkout to complete your payment.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* STEP 2: STAFF (Join Workspace) */}
           {step === 2 && selectedRole === "staff" && (
             <div className="animate-in fade-in slide-in-from-right-4 duration-500 bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 space-y-6">
@@ -549,7 +766,7 @@ export default function OnboardingPage() {
                   </>
                 ) : (
                   <>
-                    Complete Setup
+                    {selectedRole === "restaurant_admin" && selectedPlan !== "free_trial" ? "Proceed to Payment" : "Complete Setup"}
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </>
                 )}
