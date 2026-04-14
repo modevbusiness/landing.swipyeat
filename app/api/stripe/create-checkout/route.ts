@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { restaurantId, billingCycle, email } = await request.json();
+    const { restaurantId, billingCycle, email, planType = "pro" } = await request.json();
 
     if (!restaurantId) {
       return NextResponse.json(
@@ -25,17 +25,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Fetch the pro plan from DB to get real prices
+    // Fetch the correct plan from DB to get real prices
     const { data: plan, error: planError } = await supabaseAdmin
       .from("subscription_plans")
       .select("*")
-      .eq("plan_type", "pro")
+      .eq("plan_type", planType)
       .eq("is_active", true)
       .single();
 
     if (planError || !plan) {
       return NextResponse.json(
-        { error: "Pro plan not found in database" },
+        { error: `Plan '${planType}' not found in database` },
         { status: 404 }
       );
     }
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         restaurantId,
         userId,
-        planType: "pro",
+        planType: planType,
         billingCycle: billingCycle || "monthly",
       },
       success_url: `${origin}/onboarding/success?session_id={CHECKOUT_SESSION_ID}`,

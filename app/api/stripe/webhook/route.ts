@@ -37,55 +37,56 @@ export async function POST(request: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session;
         const restaurantId = session.metadata?.restaurantId;
         const billingCycle = session.metadata?.billingCycle || "monthly";
+        const planType = session.metadata?.planType || "pro";
 
         if (restaurantId && session.subscription) {
-          // Find or create pro plan
-          let { data: proPlan } = await supabaseAdmin
+          // Find the target plan
+          let { data: targetPlan } = await supabaseAdmin
             .from("subscription_plans")
             .select("id")
-            .eq("plan_type", "pro")
+            .eq("plan_type", planType)
             .single();
 
-          // If no pro plan exists, create one
-          if (!proPlan) {
+          // If no target plan exists and it's 'pro', create one as fallback
+          if (!targetPlan && planType === "pro") {
             const { data: newPlan } = await supabaseAdmin
               .from("subscription_plans")
               .insert({
                 name: "Pro",
-                plan_type: "pro",
+                plan_type: planType,
                 price_monthly: 299,
                 price_yearly: 2990,
                 max_tables: -1,
                 max_menu_items: -1,
                 max_staff: -1,
-                features: {
-                  analytics: true,
-                  multi_branch: true,
-                  priority_support: true,
-                },
-                is_active: true,
+                features: '["Unlimited tables", "Full menu management", "Advanced analytics & reports", "Unlimited staff members", "Priority support", "QR code generation"]',
               })
-              .select("id")
+              .select()
               .single();
-            proPlan = newPlan;
+            targetPlan = newPlan;
           }
 
-          if (proPlan) {
-            // Deactivate current free trial subscription
+          if (targetPlan) {
+            // Deactivate all previous subscriptions
             await supabaseAdmin
               .from("subscriptions")
-              .update({ is_current: false, status: "canceled" })
-              .eq("restaurant_id", restaurantId)
-              .eq("is_current", true);
+              .update({ is_current: false })
+              .eq("restaurant_id", restaurantId);
 
-            // Create the pro subscription
+            // Fetch the Stripe subscription to get ends_at
+            const stripeSubscription = await stripe.subscriptions.retrieve(
+              session.subscription as string
+            ) as any;
+
+            // Insert new sub
             await supabaseAdmin.from("subscriptions").insert({
               restaurant_id: restaurantId,
-              plan_id: proPlan.id,
+              plan_id: targetPlan.id,
               status: "active",
               is_current: true,
               billing_cycle: billingCycle,
-              started_at: new Date().toISOString(),
+              started_at: new Date(stripeSubscription.current_period_start * 1000).toISOString(),
+              ends_at: new Date(stripeSubscription.current_period_end * 1000).toISOString(),
               auto_renew: true,
             });
           }
