@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create the new subscription
-    await supabaseAdmin.from("subscriptions").insert({
+    const { error: insertError } = await supabaseAdmin.from("subscriptions").insert({
       restaurant_id: restaurantId,
       plan_id: targetPlan.id,
       status: "active",
@@ -96,6 +96,11 @@ export async function POST(request: NextRequest) {
       ends_at: endsAt,
       auto_renew: true,
     });
+
+    if (insertError) {
+      console.error("Insert Error in landing verify-session:", insertError);
+      return NextResponse.json({ error: "Failed to insert", details: insertError }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

@@ -47,6 +47,13 @@ export default function OnboardingPage() {
   const [inviteData, setInviteData] = useState<any>(null);
   const [isCheckingInvite, setIsCheckingInvite] = useState(true);
 
+  // Pre-fill email with the user's authenticated Clerk email
+  useEffect(() => {
+    if (user?.primaryEmailAddress?.emailAddress && !email) {
+      setEmail(user.primaryEmailAddress.emailAddress);
+    }
+  }, [user, email]);
+
   useEffect(() => {
     const checkInvite = async () => {
       try {
@@ -122,35 +129,40 @@ export default function OnboardingPage() {
     }
   };
 
-  const uploadLogoToCloudinary = async (): Promise<string | null> => {
+  const uploadLogoToSupabase = async (): Promise<string | null> => {
     if (!logoFile) return null;
-    
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-    
-    if (!cloudName || !uploadPreset) {
-      console.warn("Cloudinary configuration missing. Logo will not be uploaded.");
-      return null;
-    }
     
     setIsUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("file", logoFile);
-      formData.append("upload_preset", uploadPreset);
-
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: "POST",
-        body: formData,
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        return data.secure_url;
+      // Validate file
+      if (!logoFile.type.startsWith('image/')) {
+        throw new Error('Please upload an image file');
       }
-      return null;
+      if (logoFile.size > 5 * 1024 * 1024) {
+        throw new Error('Image size must be less than 5MB');
+      }
+
+      const fileExt = logoFile.name.split('.').pop();
+      const cleanName = restaurantName ? restaurantName.replace(/[^a-z0-9]/gi, '_').toLowerCase() : 'onboarding';
+      const fileName = `${cleanName}-${Date.now()}.${fileExt}`;
+      const filePath = `restaurants/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('Restaurants-Media')
+        .upload(filePath, logoFile);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('Restaurants-Media')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
     } catch (err) {
       console.error("Failed to upload logo:", err);
+      // Don't block onboarding if logo fails, just throw a toast or let it be null
       return null;
     } finally {
       setIsUploading(false);
@@ -214,7 +226,7 @@ export default function OnboardingPage() {
       // 1. Upload logo if provided
       let logoUrl = null;
       if (selectedRole === "restaurant_admin" && logoFile) {
-        logoUrl = await uploadLogoToCloudinary();
+        logoUrl = await uploadLogoToSupabase();
       }
 
       // 2. Update Clerk user metadata

@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
     const yearlyAmount = Math.round(plan.price_yearly * 100);
 
     const origin = request.nextUrl.origin;
+    const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3001";
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -75,7 +76,7 @@ export async function POST(request: NextRequest) {
         planType: planType,
         billingCycle: billingCycle || "monthly",
       },
-      success_url: `${origin}/onboarding/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${adminUrl}/dashboard/subscription?upgraded=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/redirect`,
     });
 
