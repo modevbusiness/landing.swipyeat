@@ -130,7 +130,7 @@ export default function Header() {
                 <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
             </SignedOut>
             <SignedIn>
-                <Link className='bg-white text-primary font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">Dashboard</Link>
+                <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">Dashboard</Link>
             </SignedIn>
         </div>
         <div onClick={() => setIsMenuOpen(prev => !prev)} className='md:hidden cursor-pointer'>
