@@ -22,7 +22,7 @@ export default function PricingPage() {
     const pricingTiers: PricingTier[] = [
         {
             name: "Standard",
-            monthlyPrice: 49,
+            monthlyPrice: 499,
             description: "Perfect for small restaurants and cafes just getting started",
             features: [
                 "Up to 5 devices",
@@ -38,7 +38,7 @@ export default function PricingPage() {
         },
         {
             name: "Premium",
-            monthlyPrice: 99,
+            monthlyPrice: 899,
             description: "Ideal for growing restaurants with multiple staff members",
             features: [
                 "Up to 15 devices",
@@ -57,7 +57,7 @@ export default function PricingPage() {
         },
         {
             name: "Unlimited",
-            monthlyPrice: 199,
+            monthlyPrice: 1790,
             description: "For restaurant chains and enterprises with extensive needs",
             features: [
                 "Unlimited devices",
@@ -85,8 +85,8 @@ export default function PricingPage() {
                 { name: "Digital Menu Builder", standard: "Basic", premium: "Advanced", unlimited: "Enterprise" },
                 { name: "POS System", standard: true, premium: true, unlimited: true },
                 { name: "KDS System", standard: false, premium: true, unlimited: true },
-                { name: "Online Ordering", standard: false, premium: true, unlimited: true },
-                { name: "Table Reservations", standard: false, premium: true, unlimited: true },
+                //{ name: "Online Ordering", standard: false, premium: true, unlimited: true },
+                //{ name: "Table Reservations", standard: false, premium: true, unlimited: true },
             ]
         },
         {
@@ -96,7 +96,7 @@ export default function PricingPage() {
                 { name: "Devices", standard: "Up to 5", premium: "Up to 15", unlimited: "Unlimited" },
                 { name: "Staff Accounts", standard: "5", premium: "25", unlimited: "Unlimited" },
                 { name: "Inventory Management", standard: false, premium: true, unlimited: true },
-                { name: "Staff Management Tools", standard: false, premium: true, unlimited: true },
+                //{ name: "Staff Management Tools", standard: false, premium: true, unlimited: true },
             ]
         },
         {
@@ -105,17 +105,17 @@ export default function PricingPage() {
                 { name: "Sales Dashboard", standard: "Basic", premium: "Advanced", unlimited: "Custom" },
                 { name: "Revenue Reports", standard: true, premium: true, unlimited: true },
                 { name: "Customer Insights", standard: false, premium: true, unlimited: true },
-                { name: "Staff Performance", standard: false, premium: true, unlimited: true },
-                { name: "API Access", standard: false, premium: false, unlimited: true },
+                // { name: "Staff Performance", standard: false, premium: true, unlimited: true },
+                // { name: "API Access", standard: false, premium: false, unlimited: true },
             ]
         },
         {
             category: "Customer Engagement",
             features: [
-                { name: "Loyalty Program", standard: false, premium: "Basic", unlimited: "Advanced" },
+                // { name: "Loyalty Program", standard: false, premium: "Basic", unlimited: "Advanced" },
                 { name: "Customer Feedback", standard: false, premium: true, unlimited: true },
-                { name: "Email Marketing", standard: false, premium: false, unlimited: true },
-                { name: "SMS Notifications", standard: false, premium: false, unlimited: true },
+                // { name: "Email Marketing", standard: false, premium: false, unlimited: true },
+                // { name: "SMS Notifications", standard: false, premium: false, unlimited: true },
             ]
         },
         {
@@ -124,8 +124,7 @@ export default function PricingPage() {
                 { name: "Support", standard: "Email", premium: "Priority", unlimited: "24/7 Dedicated" },
                 { name: "Onboarding", standard: "Self-serve", premium: "Guided", unlimited: "Dedicated Manager" },
                 { name: "Custom Integrations", standard: false, premium: false, unlimited: true },
-                { name: "White-label Options", standard: false, premium: false, unlimited: true },
-                { name: "SLA Guarantee", standard: false, premium: false, unlimited: true },
+                // { name: "White-label Options", standard: false, premium: false, unlimited: true },
             ]
         },
     ];
@@ -133,10 +132,10 @@ export default function PricingPage() {
     
 
     const calculatePrice = (monthlyPrice: number) => {
-        if (isYearly) {
-            const yearlyPrice = monthlyPrice * 12 * 0.9;
-            return Math.round(yearlyPrice / 12);
-        }
+        // if (isYearly) {
+        //     const yearlyPrice = monthlyPrice * 12 * 0.9;
+        //     return Math.round(yearlyPrice / 12);
+        // }
         return monthlyPrice;
     };
 
@@ -184,16 +183,16 @@ export default function PricingPage() {
                                     <th className="text-left p-4 text-lg font-heading w-1/4">Feature</th>
                                     <th className="text-center p-4 text-lg font-heading w-1/4">
                                         <div>Standard</div>
-                                        <div className="text-primary text-2xl font-heading">${calculatePrice(49)}/mo</div>
+                                        <div className="text-primary text-2xl font-heading">{calculatePrice(499)}Dh/mo</div>
                                     </th>
                                     <th className="text-center p-4 text-lg font-heading w-1/4 bg-primary/5 ">
                                         <div className="text-primary">Premium</div>
-                                        <div className="text-primary text-2xl font-heading">${calculatePrice(99)}/mo</div>
+                                        <div className="text-primary text-2xl font-heading">{calculatePrice(899)}Dh/mo</div>
                                         <span className="bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded-full">POPULAR</span>
                                     </th>
                                     <th className="text-center p-4 text-lg font-heading w-1/4">
                                         <div>Unlimited</div>
-                                        <div className="text-primary text-2xl font-heading">${calculatePrice(199)}/mo</div>
+                                        <div className="text-primary text-2xl font-heading">{calculatePrice(1790)}Dh/mo</div>
                                     </th>
                                 </tr>
                             </thead>
@@ -225,7 +224,7 @@ export default function PricingPage() {
                                         : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'
                                 }`}
                             >
-                                <span>{tier.name} — ${calculatePrice(tier.monthlyPrice)}/mo</span>
+                                <span>{tier.name} — {calculatePrice(tier.monthlyPrice)}Dh/mo</span>
                                 <ArrowRight size={20} />
                             </Link>
                         ))}

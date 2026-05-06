@@ -21,15 +21,15 @@ function Card({ title, description, image, buttonText, buttonLink }: CardProps) 
     return (
         <div className="w-full rounded flex flex-col md:flex-row gap-4 bg-secondary">
             <div className="flex-1 p-4 md:p-8 flex flex-col justify-center gap-5">
-                <h1 className="text-black text-3xl font-bold font-heading">{title}</h1>
-                <p className="text-black/70 text-xl">{description}</p>
+                <h1 className="text-white text-3xl font-bold font-heading">{title}</h1>
+                <p className="text-white text-xl">{description}</p>
                 <Link className="bg-white w-max px-4 py-2 flex items-center gap-2 hover:gap-4 transition-all text-xl" href={buttonLink}>
                     <span>{buttonText}</span>
                     <ArrowRight size={24} />
                 </Link>
             </div>
             <div className="flex-1">
-                <Image src={image} alt={title} className="w-full h-full object-cover rounded-r" width={500} height={300} />
+                <Image src={image} alt={title} className="w-full mt-[100px] object-cover rounded-r" width={500} height={300} />
             </div>
         </div>
     );
@@ -44,21 +44,21 @@ export default function Products() {
         { 
             title: "Menu Builder",
             description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/menuItems.png",
             buttonText: "Learn More",
             buttonLink: "/menu-builder"
         },
         {
             title: "POS System",
             description: "Our Point of Sale (POS) system streamlines order processing, allowing your staff to quickly and accurately take orders, manage payments, and track sales.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/ordersDashboard.png",
             buttonText: "Learn More",
             buttonLink: "/pos-system"
         },
         {
             title: "KDS System",
             description: "Streamline your kitchen operations with our Kitchen Display System (KDS). Manage and prioritize orders, track preparation times, and ensure smooth communication between the front and back of house.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/kds.png",
             buttonText: "Learn More",
             buttonLink: "/kds-system"
         }
@@ -148,7 +148,7 @@ export default function Products() {
                         ref={(el) => {
                             if (el) cardsRef.current[i] = el;
                         }}
-                        className="absolute inset-0"
+                        className="absolute   inset-0"
                     >
                         <Card {...product} />
                     </div>

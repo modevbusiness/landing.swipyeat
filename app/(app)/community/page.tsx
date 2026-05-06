@@ -59,12 +59,12 @@ export default function CommunityPage() {
         },
     ];
 
-    const highlights = [
-        { value: "10,000+", label: "Community Members" },
-        { value: "50+", label: "Countries Represented" },
-        { value: "15,000+", label: "Questions Answered" },
-        { value: "200+", label: "Community Contributors" },
-    ];
+    // const highlights = [
+    //     { value: "10,000+", label: "Community Members" },
+    //     { value: "50+", label: "Countries Represented" },
+    //     { value: "15,000+", label: "Questions Answered" },
+    //     { value: "200+", label: "Community Contributors" },
+    // ];
 
     const testimonials = [
         {
@@ -130,7 +130,7 @@ export default function CommunityPage() {
             </div>
 
             {/* Stats */}
-            <div className="bg-secondary p-8" id="community-stats">
+            {/* <div className="bg-secondary p-8" id="community-stats">
                 <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
                     {highlights.map((stat, i) => (
                         <div key={i} className="text-center">
@@ -139,7 +139,7 @@ export default function CommunityPage() {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
 
             {/* Channels */}
             <div className="p-8 md:p-16" id="channels">

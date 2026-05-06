@@ -47,6 +47,7 @@ export default function Header() {
             ]
         },
     ]
+
     const products = [
         { 
             title: "Menu Builder", 
@@ -74,13 +75,12 @@ export default function Header() {
         }
     ]
   return (
-    <header className={`w-full bg-primary text-white px-4 py-4 md:py-0 flex sticky top-0 z-50 items-center ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-300`}>
+    <header className={`w-full bg-white text-white px-4 py-4 md:py-0 flex sticky top-0 z-50 items-center ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-300`}>
         <Link onClick={() => setIsMenuOpen(false)} href="/" className='flex flex-1 items-center gap-1'>
-            <Image src="/logo.svg" alt="Logo" width={50} height={50} />
-            <span className='font-bold text-lg'>SwipyEat</span>
+            <Image src="/logo.png" alt="Logo" width={100} height={60} />
         </Link>
         <nav className='md:flex hidden flex-1 items-center justify-center'>
-            <Link className='group w-max flex items-center font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
+            <Link className='group w-max flex items-center font-medium text-black  py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
                 <span>Feautures </span><ChevronDown className='inline-block w-4 h-4 ml-1' />
                 <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
                     {features.map((feature) => (
@@ -100,7 +100,7 @@ export default function Header() {
                     ))}
                 </div>
             </Link>
-            <Link className='font-medium w-max flex items-center text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border group' href="/products">
+            <Link className='font-medium w-max flex items-center text-black  py-6 px-3 border-b-2 border-transparent hover:border-white box-border group' href="/products">
                 <span>Products</span><ChevronDown className='inline-block w-4 h-4 ml-1' />
                 <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
                     {products.map((product) => (
@@ -120,22 +120,22 @@ export default function Header() {
                     ))}
                 </div>
             </Link>
-            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">Pricing</Link>
-            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">Docs</Link>
-            <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">Contact</Link>
+            <Link className='font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">Pricing</Link>
+            {/* <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">Docs</Link> */}
+            <Link className='font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">Contact</Link>
         </nav>
         <div className='md:flex hidden items-center gap-4 flex-1 justify-end'>
             <SignedOut>
-                <Link className='text-white font-medium px-4 py-2' href="/sign-in">Sign in</Link>
-                <Link className='bg-white text-primary font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
+                <Link className='text-black font-medium px-4 py-2' href="/sign-in">Sign in</Link>
+                <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
             </SignedOut>
             <SignedIn>
                 <Link className='bg-white text-primary font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">Dashboard</Link>
             </SignedIn>
         </div>
-        <div onClick={() => setIsMenuOpen(prev => !prev)} className='md:hidden'>
-                <Menu className='w-6 h-6' />
-            </div>
+        <div onClick={() => setIsMenuOpen(prev => !prev)} className='md:hidden cursor-pointer'>
+                <Menu className='w-6 h-6 text-black' />
+        </div>
         {isMenuOpen && (
             <div className='absolute top-full left-0 w-full h-screen bg-primary text-white flex flex-col items-center py-4 md:hidden'>
                 <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">

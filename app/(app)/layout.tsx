@@ -8,7 +8,7 @@ export default function Layout({
 }>) {
   return (
     <main>
-        <div className="bg-secondary p-3 flex text-center justify-center items-center ">
+        <div className="bg-yellow-300 p-3 flex text-center text-black  justify-center items-center ">
             Get 14 days free trial, no credit card required
         </div>
         <Header />

@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 export default function FinalCTA() {
     return (
-        <div className="bg-secondary p-8 md:p-16" id="get-started">
+        <div className="bg- p-8 md:p-16" id="get-started">
             <div className="max-w-4xl mx-auto text-center">
                 <h1 className="text-primary text-xl font-mono border-b border-primary w-max mx-auto">
                     Ready to Transform?

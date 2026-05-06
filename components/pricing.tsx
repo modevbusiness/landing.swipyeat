@@ -7,6 +7,8 @@ import { useState } from "react";
 interface PricingTier {
     name: string;
     monthlyPrice: number;
+    yearlyTotal: number;
+    yearlySavings: number;
     description: string;
     features: string[];
     highlighted?: boolean;
@@ -18,25 +20,29 @@ export default function Pricing() {
     const [isYearly, setIsYearly] = useState(true);
     const pricingTiers: PricingTier[] = [
         {
-            name: "Standard",
-            monthlyPrice: 49,
-            description: "Perfect for small restaurants and cafes just getting started",
+            name: "Starter",
+            monthlyPrice: 499,
+            yearlyTotal: 4999,
+            yearlySavings: 989,
+            description: "Ideal for small restaurants and cafés just getting started.",
             features: [
                 "Up to 5 devices",
                 "Basic menu builder",
-                "POS system",
+                "Point of Sale (POS) system",
                 "Email support",
                 "Basic analytics",
                 "1 location",
                 "Standard updates"
             ],
             buttonText: "Get Started",
-            buttonLink: "/sign-up?plan=standard"
+            buttonLink: "/sign-up?plan=starter"
         },
         {
             name: "Premium",
-            monthlyPrice: 99,
-            description: "Ideal for growing restaurants with multiple staff members",
+            monthlyPrice: 899,
+            yearlyTotal: 8999,
+            yearlySavings: 789,
+            description: "Ideal for growing restaurants with multiple staff members.",
             features: [
                 "Up to 15 devices",
                 "Advanced menu builder",
@@ -49,23 +55,23 @@ export default function Pricing() {
                 "Staff management tools"
             ],
             highlighted: true,
-            buttonText: "Start Free Trial",
+            buttonText: "Free Trial",
             buttonLink: "/sign-up?plan=premium"
         },
         {
             name: "Unlimited",
-            monthlyPrice: 199,
-            description: "For restaurant chains and enterprises with extensive needs",
+            monthlyPrice: 999,
+            yearlyTotal: 11000,
+            yearlySavings: 600,
+            description: "For restaurant chains and businesses with extensive needs.",
             features: [
                 "Unlimited devices",
                 "Enterprise menu builder",
                 "Full system suite",
-                "24/7 dedicated support",
-                "Custom analytics & API access",
+                "Dedicated 24/7 support",
                 "Unlimited locations",
                 "Advanced loyalty program",
                 "Full inventory management",
-                "Advanced staff tools",
                 "Custom integrations",
                 "White-label options",
                 "Dedicated account manager"
@@ -75,16 +81,11 @@ export default function Pricing() {
         }
     ];
 
-    const calculatePrice = (monthlyPrice: number) => {
+    const calculatePrice = (tier: PricingTier) => {
         if (isYearly) {
-            const yearlyPrice = monthlyPrice * 12 * 0.9; // 10% discount
-            return Math.round(yearlyPrice / 12);
+            return Math.round(tier.yearlyTotal / 12);
         }
-        return monthlyPrice;
-    };
-
-    const calculateYearlySavings = (monthlyPrice: number) => {
-        return Math.round(monthlyPrice * 12 * 0.1);
+        return tier.monthlyPrice;
     };
 
     return (
@@ -122,7 +123,7 @@ export default function Pricing() {
                         Yearly
                     </span>
                     <span className="bg-primary hidden md:block text-white text-sm font-semibold px-3 py-1 rounded-full">
-                        Save 10%
+                        Save up to 25%
                     </span>
                 </div>
 
@@ -150,20 +151,20 @@ export default function Pricing() {
                             
                             <div className="mb-4">
                                 <span className={`text-5xl font-heading ${
-                                    tier.highlighted ? 'text-white' : 'text-primary'
+                                    tier.highlighted ? 'text-white' : 'text-[#5e9d01]'
                                 }`}>
-                                    ${calculatePrice(tier.monthlyPrice)}
+                                    {calculatePrice(tier)}<sub className='text-2xl'>Dh</sub>
                                 </span>
                                 <span className={`text-lg ml-2 ${
                                     tier.highlighted ? 'text-white/70' : 'text-black/60'
                                 }`}>
-                                    per month
+                                    / mo
                                 </span>
                                 {isYearly && (
                                     <div className={`text-sm mt-1 ${
                                         tier.highlighted ? 'text-white/60' : 'text-black/50'
                                     }`}>
-                                        Billed ${calculatePrice(tier.monthlyPrice) * 12 }/year · Save ${calculateYearlySavings(tier.monthlyPrice)}/year
+                                        Billed {tier.yearlyTotal} Dh / year · Save {tier.yearlySavings} Dh / year
                                     </div>
                                 )}
                             </div>
@@ -178,11 +179,11 @@ export default function Pricing() {
                                 {tier.features.map((feature, index) => (
                                     <li key={index} className="flex items-start gap-3">
                                         <div className={`rounded-full p-1 mt-0.5 ${
-                                            tier.highlighted ? 'bg-white/20' : 'bg-primary/10'
+                                            tier.highlighted ? 'bg-white/20' : 'bg-[#5e9d01]/10'
                                         }`}>
                                             <Check 
                                                 size={16} 
-                                                className={tier.highlighted ? 'text-white' : 'text-primary'}
+                                                className={tier.highlighted ? 'text-white' : 'text-[#5e9d01]'}
                                             />
                                         </div>
                                         <span className={
@@ -211,7 +212,7 @@ export default function Pricing() {
 
                 <div className="mt-12 text-center">
                     <p className="text-black/60">
-                        Not sure which plan is right for you?{" "}
+                        Not sure which plan to choose?{" "}
                         <Link href="/pricing#compare-plans" className="text-primary font-semibold hover:underline">
                             Compare all features
                         </Link>

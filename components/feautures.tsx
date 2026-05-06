@@ -18,29 +18,21 @@ export default function Feautures() {
         },
         {
             title: "Kitchen Display System (KDS)",
+            image: "/kds.png",
             description: "The KDS provides kitchen staff with a clear and organized view of incoming orders, allowing them to prioritize and manage their workflow efficiently. This helps to streamline kitchen operations and ensure that meals are prepared and delivered in a timely manner.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361"
         },
         {
             title: "Comprehensive Management Tools",
             description: "Our platform offers a suite of management tools that provide insights into sales, inventory, and staff performance. This data-driven approach helps restaurant owners make informed decisions to optimize their operations and enhance profitability.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361"
+            image: "/analyticsDashboard.png"
         },
         {
             title: "Table Management",
             description: "Efficiently manage table assignments, reservations, and status tracking. Optimize seating arrangements and reduce customer wait times with real-time table availability.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361"
+            image: "/ordersDashboard.png"
         },
-        {
-            title: "Payment Processing",
-            description: "Secure and fast payment processing integrated directly into the system. Support multiple payment methods and generate detailed transaction reports for better financial management.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361"
-        },
-        {
-            title: "Customer Loyalty Program",
-            description: "Build customer relationships with integrated loyalty and rewards programs. Track customer preferences and create personalized experiences to encourage repeat business.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361"
-        }
+        
+        
     ]
     const [selectedFeature, setSelectedFeature] = useState(0);
     return (

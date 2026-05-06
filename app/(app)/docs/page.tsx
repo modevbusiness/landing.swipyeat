@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Book, Code, Zap, Settings, Database, Shield, Monitor, Tablet, CookingPot, Search } from "lucide-react";
+import { ArrowRight, Book, Zap, Settings, Monitor, Tablet, CookingPot, Search } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -77,54 +77,6 @@ export default function DocsPage() {
                 { title: "Performance analytics", time: "4 min" },
             ]
         },
-        {
-            id: "management",
-            icon: Database,
-            title: "Management & Analytics",
-            description: "Reports, inventory, staff management, and business insights.",
-            articles: [
-                { title: "Dashboard overview", time: "5 min" },
-                { title: "Sales reports and exports", time: "6 min" },
-                { title: "Inventory management", time: "7 min" },
-                { title: "Staff accounts and permissions", time: "5 min" },
-                { title: "Multi-location management", time: "6 min" },
-                { title: "Customer insights", time: "4 min" },
-                { title: "Loyalty program setup", time: "5 min" },
-                { title: "Tax configuration", time: "4 min" },
-            ]
-        },
-        {
-            id: "integrations",
-            icon: Code,
-            title: "API & Integrations",
-            description: "Connect SwipyEat with your existing tools and build custom integrations.",
-            articles: [
-                { title: "API overview and authentication", time: "8 min" },
-                { title: "REST API reference", time: "15 min" },
-                { title: "Webhooks", time: "6 min" },
-                { title: "Third-party integrations", time: "5 min" },
-                { title: "Zapier integration", time: "4 min" },
-                { title: "Delivery platform connections", time: "6 min" },
-                { title: "Accounting software sync", time: "5 min" },
-                { title: "Rate limits and best practices", time: "4 min" },
-            ]
-        },
-        {
-            id: "security-docs",
-            icon: Shield,
-            title: "Security & Compliance",
-            description: "Data protection, user permissions, and compliance documentation.",
-            articles: [
-                { title: "Security overview", time: "5 min" },
-                { title: "Two-factor authentication", time: "3 min" },
-                { title: "Role-based access control", time: "5 min" },
-                { title: "Data export and portability", time: "4 min" },
-                { title: "GDPR compliance", time: "6 min" },
-                { title: "PCI DSS compliance", time: "5 min" },
-                { title: "Audit logs", time: "4 min" },
-                { title: "SSO configuration (Enterprise)", time: "8 min" },
-            ]
-        },
     ];
 
     const filteredCategories = searchQuery
@@ -166,7 +118,7 @@ export default function DocsPage() {
             </div>
 
             {/* Getting Started */}
-            <div className="p-8 md:p-16 bg-gray-50" id="getting-started">
+            {/* <div className="p-8 md:p-16 bg-gray-50" id="getting-started">
                 <div className="max-w-6xl mx-auto">
                     <h1 className="text-primary text-xl font-mono border-b w-max">Getting Started</h1>
                     <h2 className="text-5xl font-heading py-6">
@@ -191,7 +143,7 @@ export default function DocsPage() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Doc Categories */}
             <div className="p-8 md:p-16" id="all-docs">

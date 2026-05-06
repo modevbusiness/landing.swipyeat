@@ -15,7 +15,7 @@ export default function FeaturesPage() {
             title: "Digital Menu",
             subtitle: "Create stunning digital menus in minutes",
             description: "Transform your paper menus into beautiful, interactive digital experiences. Update items, prices, and descriptions in real-time across all your locations.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/menuItems.png",
             benefits: [
                 "Drag-and-drop menu builder with categories and modifiers",
                 "Real-time updates — change prices and items instantly",
@@ -31,7 +31,7 @@ export default function FeaturesPage() {
             title: "Online Ordering",
             subtitle: "Accept orders from anywhere, anytime",
             description: "Give your customers a seamless ordering experience with a branded online storefront. Accept takeaway, delivery, and dine-in orders all from one platform.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/ordersDashboard.png",
             benefits: [
                 "Branded ordering page with your logo and colors",
                 "Real-time order tracking for customers",
@@ -41,61 +41,31 @@ export default function FeaturesPage() {
                 "Automatic order confirmation via SMS and email",
             ]
         },
-        {
-            id: "table-reservation",
-            icon: Users,
-            title: "Table Reservation",
-            subtitle: "Fill every seat, reduce no-shows",
-            description: "Manage reservations effortlessly with real-time availability, automated confirmations, and integrated waitlist management to maximize your seating capacity.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
-            benefits: [
-                "Real-time table availability and floor plan view",
-                "Automated SMS/email confirmations and reminders",
-                "Waitlist management with estimated wait times",
-                "Customer preference tracking (seating, allergies)",
-                "Integration with Google Maps and social media",
-                "No-show tracking and analytics",
-            ]
-        },
-        {
-            id: "order-management",
-            icon: MonitorCheck,
-            title: "Real-Time Order Management",
-            subtitle: "From table to kitchen in milliseconds",
-            description: "Eliminate communication gaps between front-of-house and kitchen. Orders flow instantly from the waiter's device to the kitchen display, reducing errors and speeding up service.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
-            benefits: [
-                "Instant order transmission — no more paper tickets",
-                "Order modification and special instructions support",
-                "Course-by-course firing for multi-course meals",
-                "Split bills and shared orders support",
-                "Order history and repeat order functionality",
-                "Real-time status updates for waitstaff",
-            ]
-        },
-        {
-            id: "payment-processing",
-            icon: CreditCard,
-            title: "Payment Processing",
-            subtitle: "Fast, secure, and flexible payments",
-            description: "Accept any payment method your customers prefer. From credit cards to digital wallets, process payments securely with built-in fraud protection and detailed transaction reports.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
-            benefits: [
-                "Accept cards, digital wallets, and contactless payments",
-                "Automatic tip calculation and split bill support",
-                "End-to-end encryption and PCI compliance",
-                "Detailed transaction reports and reconciliation",
-                "Multi-currency support for international guests",
-                "Automated tax calculation per region",
-            ]
-        },
+        
+        // {
+        //     id: "order-management",
+        //     icon: MonitorCheck,
+        //     title: "Real-Time Order Management",
+        //     subtitle: "From table to kitchen in milliseconds",
+        //     description: "Eliminate communication gaps between front-of-house and kitchen. Orders flow instantly from the waiter's device to the kitchen display, reducing errors and speeding up service.",
+        //     image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+        //     benefits: [
+        //         "Instant order transmission — no more paper tickets",
+        //         "Order modification and special instructions support",
+        //         "Course-by-course firing for multi-course meals",
+        //         "Split bills and shared orders support",
+        //         "Order history and repeat order functionality",
+        //         "Real-time status updates for waitstaff",
+        //     ]
+        // },
+       
         {
             id: "analytics",
             icon: BarChart3,
             title: "Analytics & Insights",
             subtitle: "Data-driven decisions for growth",
             description: "Understand your business like never before. Track sales trends, popular dishes, peak hours, and staff performance — all in one powerful dashboard.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/analyticsDashboard.png",
             benefits: [
                 "Real-time sales dashboard with trends and forecasts",
                 "Best-selling items and menu performance analysis",
@@ -138,8 +108,8 @@ export default function FeaturesPage() {
                                 <h.icon size={24} className="text-white" />
                             </div>
                             <div>
-                                <h3 className="font-heading text-lg">{h.title}</h3>
-                                <p className="text-black/60 text-sm">{h.description}</p>
+                                <h3 className="font-heading text-lg text-white">{h.title}</h3>
+                                <p className="text-white text-sm">{h.description}</p>
                             </div>
                         </div>
                     ))}
@@ -206,13 +176,13 @@ export default function FeaturesPage() {
                                         ))}
                                     </ul>
                                 </div>
-                                <div className="flex-1">
+                                <div className="flex-1 max-h-[400px] bg-gray-50 overflow-hidden">
                                     <Image
                                         src={cat.image}
                                         alt={cat.title}
                                         width={600}
                                         height={400}
-                                        className="w-full h-full object-cover rounded-lg"
+                                        className="w-full mt-[60px] border-4 border-black h-full object-cover rounded-lg"
                                     />
                                 </div>
                             </div>

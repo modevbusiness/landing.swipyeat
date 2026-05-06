@@ -6,22 +6,22 @@ export default function HowItWorks() {
         {
             icon: Tablet,
             title: "Waiters Take Orders",
+            image : "/waitersScreens.png",
             description: "Servers use tablets or mobile devices to take orders directly at the table. Orders are instantly sent to the kitchen with all special requests and modifications clearly noted.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
             step: 1
         },
         {
             icon: MonitorCheck,
             title: "Kitchen Prepares Orders",
             description: "Kitchen staff receives orders on the KDS in real-time. Orders are organized by priority and station, ensuring efficient preparation and timely delivery to tables.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/kds.png",
             step: 2
         },
         {
             icon: BarChart3,
             title: "Management Monitors Performance",
             description: "Restaurant owners get real-time insights into sales, inventory, and staff performance. Make data-driven decisions to optimize operations and increase profitability.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/analyticsDashboard.png",
             step: 3
         }
     ];

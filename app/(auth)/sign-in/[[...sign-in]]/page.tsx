@@ -7,7 +7,7 @@ export default function SignInPage() {
         appearance={{
           theme: "simple",
           variables: {
-            colorPrimary: "#ff4d00",
+            colorPrimary: "#e77b11",
           },
         }}
       />

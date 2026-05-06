@@ -7,7 +7,7 @@ export default function SignUpPage() {
         appearance={{
           theme: "simple",
           variables: {
-            colorPrimary: "#ff4d00",
+            colorPrimary: "#e77b11",
           },
         }}
       />

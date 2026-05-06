@@ -12,7 +12,7 @@ export default function ProductsPage() {
             title: "Menu Builder",
             tagline: "Build beautiful digital menus in minutes",
             heroDescription: "A powerful drag-and-drop menu builder that lets you create, organize, and publish your restaurant menu across all channels — QR codes, online ordering, and in-house tablets.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-billing.c4ca67b2.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/menuItems.png",
             features: [
                 {
                     title: "Drag & Drop Editor",
@@ -51,7 +51,7 @@ export default function ProductsPage() {
             title: "POS System",
             tagline: "Complete point of sale for modern restaurants",
             heroDescription: "A fast, reliable point-of-sale system designed specifically for restaurants. Process orders, manage payments, track inventory, and analyze sales — all from one unified platform.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-metrics.9ea6c8b0.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/analyticsDashboard.png",
             features: [
                 {
                     title: "Fast Order Entry",
@@ -90,7 +90,7 @@ export default function ProductsPage() {
             title: "KDS System",
             tagline: "Kitchen efficiency, perfected",
             heroDescription: "A Kitchen Display System that replaces paper tickets with a clear, organized digital workflow. Kitchen staff see orders in real time, prioritized by urgency, and organized by station.",
-            image: "https://www.paddle.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcard-hero-retain.f5d7fb48.webp&w=1080&q=75&dpl=ee01bb026efdd456db5469471380af1518bbbf63d856195b1fe878f2ed7cc468363938363462626632383736616630303038303762373361",
+            image: "/kds.png",
             features: [
                 {
                     title: "Real-Time Order Display",
@@ -147,7 +147,7 @@ export default function ProductsPage() {
                         <a
                             key={product.id}
                             href={`#${product.id}`}
-                            className="flex items-center gap-2 px-6 py-4 font-medium text-black/60 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors"
+                            className="flex items-center gap-2 px-6 py-4 font-medium text-white hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors"
                         >
                             <product.icon size={18} />
                             <span>{product.title}</span>
@@ -189,13 +189,13 @@ export default function ProductsPage() {
                                         <ArrowRight size={20} />
                                     </Link>
                                 </div>
-                                <div className="flex-1">
+                                <div className="flex-1 bg-gray-50 max-h-[400px] overflow-hidden">
                                     <Image
                                         src={product.image}
                                         alt={product.title}
                                         width={600}
                                         height={400}
-                                        className="w-full h-full object-cover rounded-lg"
+                                        className="w-full mt-[60px] border-4 border-black h-full object-cover rounded-lg"
                                     />
                                 </div>
                             </div>
@@ -274,10 +274,10 @@ export default function ProductsPage() {
             {/* CTA */}
             <div className="bg-secondary p-8 md:p-16" id="products-cta">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-5xl font-heading text-black py-4">
+                    <h2 className="text-5xl font-heading text-white py-4">
                         Ready to modernize your restaurant?
                     </h2>
-                    <p className="text-xl text-black/70 mb-8">
+                    <p className="text-xl text-white mb-8">
                         Start your 14-day free trial with full access to all three products. No credit card required.
                     </p>
                     <div className="flex flex-col md:flex-row gap-4 justify-center">
@@ -289,7 +289,7 @@ export default function ProductsPage() {
                             <ArrowRight size={24} />
                         </Link>
                         <Link
-                            className="inline-flex items-center justify-center gap-2 hover:gap-4 border-2 border-primary text-primary font-semibold py-4 px-12 text-xl hover:bg-primary hover:text-white transition-all"
+                            className="inline-flex items-center justify-center gap-2 hover:gap-4 border-2 border-primary text-primary font-semibold py-4 px-12 text-xl hover:bg-primary bg-white hover:text-white transition-all"
                             href="/pricing"
                         >
                             <span>View Pricing</span>

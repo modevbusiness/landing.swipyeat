@@ -27,11 +27,14 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <div className="p-8" id="why-us">
+      {/* DUPLICATE: This quote is identical to the Hero subtitle — commented out to avoid repetition */}
+      {/* <div className="p-8" id="why-us">
         <h1 className="text-primary text-xl font-mono py-1 w-max border-b">Why SwipyEat?</h1>
         <h1 className="text-black text-2xl md:text-5xl font-heading py-4">"SwipyEat brings waiters, kitchen staff, and management together in one real-time system to streamline ordering, improve kitchen flow, and keep service running smoothly."</h1>
-      </div>
-      <Feautures />
+      </div> */}
+      {/* DUPLICATE: Features and HowItWorks cover the same 3 topics (orders, KDS, analytics) with the same images.
+          Consider keeping only one. HowItWorks is kept as it has a clearer step-by-step narrative. */}
+      {/* <Feautures /> */}
       <HowItWorks />
       <Products />
       <Pricing />

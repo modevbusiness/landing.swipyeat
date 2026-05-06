@@ -16,8 +16,7 @@ export default function Footer() {
             { name: "Contact", href: "/company/contact" }
         ],
         Resources: [
-            { name: "Documentation", href: "/docs" },
-            { name: "Help Center", href: "/help" },
+            //{ name: "Help Center", href: "/help" },
             { name: "Community", href: "/community" },
             { name: "Status", href: "/status" }
         ],
@@ -30,10 +29,10 @@ export default function Footer() {
     };
 
     const socialLinks = [
-        { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-        { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-        { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-        { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" }
+        //{ icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+        //{ icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+        { icon: Instagram, href: "https://instagram.com/swipy.eat", label: "Instagram" },
+        //{ icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" }
     ];
 
     return (
