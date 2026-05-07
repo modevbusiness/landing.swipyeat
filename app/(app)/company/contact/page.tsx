@@ -26,8 +26,8 @@ export default function ContactPage() {
             icon: Mail,
             title: "Email Us",
             description: "Our team typically responds within 24 hours.",
-            value: "hello@swipyeat.com",
-            href: "mailto:hello@swipyeat.com",
+            value: "swipyeat@gmail.com",
+            href: "mailto:swipyeat@gmail.com",
         },
         {
             icon: Phone,
