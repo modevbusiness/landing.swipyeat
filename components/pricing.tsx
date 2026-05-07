@@ -89,12 +89,12 @@ export default function Pricing() {
     };
 
     return (
-        <div className="p-8 md:p-16" id="pricing">
+        <section className="p-8 md:p-16" id="pricing" aria-labelledby="pricing-title">
             <div className="max-w-7xl mx-auto">
-                <h1 className="text-primary text-xl font-mono border-b w-max">
+                <span className="text-primary text-xl font-mono border-b w-max block">
                     Pricing
-                </h1>
-                <h2 className="text-5xl font-heading py-6">
+                </span>
+                <h2 id="pricing-title" className="text-5xl font-heading py-6">
                     Simple, transparent pricing <br /> for every restaurant
                 </h2>
                 <p className="text-xl text-black/70 max-w-2xl mb-8">
@@ -219,6 +219,6 @@ export default function Pricing() {
                     </p>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

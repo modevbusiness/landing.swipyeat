@@ -133,11 +133,11 @@ export default function Products() {
         };
     }, []);
     return (
-        <div className="p-8" id="products">
-            <h1 className="text-primary text-xl font-mono border-b w-max">
+        <section className="p-8" id="products" aria-labelledby="products-title">
+            <span className="text-primary text-xl font-mono border-b w-max block">
                 Products
-            </h1>
-            <h2 className="text-5xl font-heading py-6">
+            </span>
+            <h2 id="products-title" className="text-5xl font-heading py-6">
                 Your all-in-one <br /> restaurant solution
             </h2>
             <section ref={sectionRef} className="relative h-screen overflow-hidden">
@@ -155,6 +155,6 @@ export default function Products() {
                     ))}
                 </div>
             </section>
-        </div>
+        </section>
     )
 }

@@ -17,66 +17,70 @@ export const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "SwipyEat | AI Restaurant Management & Food Ordering Platform",
+  title: {
+    default: "SwipyEat | Restaurant Management, Food Ordering & Qr menu generation Platform",
+    template: "%s — SwipyEat",
+  },
 
   description:
     "SwipyEat helps restaurants manage orders, menus, staff, inventory, and customer experience with an AI-powered all-in-one restaurant management platform.",
 
   keywords: [
-    "restaurant management platform",
-    "restaurant POS",
-    "food ordering system",
-    "restaurant software",
+    "restaurant management software",
+    "restaurant management system",
+    "restaurant POS system",
     "kitchen display system",
+    "food ordering system",
     "restaurant inventory management",
     "AI restaurant platform",
     "online food ordering",
     "restaurant analytics",
-    "restaurant operations",
-    "restaurant management software",
-    "restaurant management",
-    "restaurant management system",
-    "hotel and restaurant management jobs",
-    "restaurant management course",
-    "hotel restaurant management jobs",
-    "restaurant management jobs",
-    "restaurant management degree",
-    "restaurant management jobs near me",
-    "restaurant management systems",
-    "restaurant management degree online",
+    "digital menu builder",
     "restaurant management app",
-    "restaurant management tips",
-    "best restaurant management software with pos",
-    "restaurant management classes",
-    "online restaurant management class",
-    "hotel and restaurant management",
-    "restaurant management solutions",
     "restaurant management tools",
-    "restaurant management courses",
     "swipyeat",
-    "swipyeat login",
+    "qr menu",
+    "qr menu maker",
+    "qr menu generator",
+    "qr menu free",
+    "qr menu restaurant",
+    "qr menu online",
+    "qr menu creator",
+    "qr code menu",
+    "qr code menu maker",
+    "qr code menu generator",
+    "qr code menu free",
+    "qr code menu restaurant",
+    "qr code menu online",
+    "qr code menu creator",
+    "food ordering system for restaurants",
+    "restaurant online ordering system",
+    "takeaway management system",
+    "online food ordering platform for restaurants",
+    "restaurant food ordering app",
+    "menu qr code",
+    "qr menu app",
+    "restaurant qr menu",
     
-    // Added from user suggestions
-    "how to improve restaurant management",
-    "what is restaurant management",
-    "how to reduce food cost in restaurant management",
-    "what is restaurant management software",
-    "what is restaurant event management software",
-    "what is hotel restaurant management",
-    "how reputation management impacts a restaurant",
-    "what is a restaurant management system",
-    "what is the best restaurant management system",
-    "what is the best restaurant management app",
-    "how to get out of restaurant management",
-    "how to make restaurant management system",
-    "is restaurant management a good career",
-    "what does hotel and restaurant management do",
-    "how to get into restaurant management",
-    "what does restaurant management mean",
-    "how good is management at doc bs restaurant?",
   ],
 
   icons: "/logo.svg",
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
+  alternates: {
+    canonical: "https://swipyeat.com",
+  },
 
   openGraph: {
     title: "SwipyEat | AI Restaurant Management Platform",
@@ -89,7 +93,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SwipyEat"
+        alt: "SwipyEat — AI-powered restaurant management platform dashboard"
       }
     ],
     locale: "en_US",
@@ -120,8 +124,8 @@ export default function RootLayout({
         <ClerkProvider>
           {children}
         </ClerkProvider>
+        <GoogleAnalytics gaId="G-SMFHY0YWXS" />
       </body>
-      <GoogleAnalytics gaId="G-SMFHY0YWXS" />
     </html>
   );
 }
