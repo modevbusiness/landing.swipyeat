@@ -19,7 +19,7 @@ interface CardProps {
 
 function Card({ title, description, image, buttonText, buttonLink }: CardProps) {
     return (
-        <div className="w-full rounded flex flex-col md:flex-row gap-4 bg-secondary">
+        <div className="w-full rounded flex flex-col md:flex-row gap-4 bg-primary">
             <div className="flex-1 p-4 md:p-8 flex flex-col justify-center gap-5">
                 <h1 className="text-white text-3xl font-bold font-heading">{title}</h1>
                 <p className="text-white text-xl">{description}</p>
