@@ -34,6 +34,19 @@ export default function FAQ() {
         },
     ];
     return (
+        <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqs.map((f) => ({
+                    "@type": "Question",
+                    name: f.question,
+                    acceptedAnswer: {
+                        "@type": "Answer",
+                        text: f.answer,
+                    },
+                })),
+            })}} />
         <div className="p-8 md:p-16" id="pricing-faq">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-primary text-xl font-mono border-b w-max">
@@ -43,9 +56,9 @@ export default function FAQ() {
                     Frequently asked questions
                 </h2>
                 <div className="flex flex-col mt-8">
-                    {faqs.map((faq, index) => (
-                        <Accordion key={index} type="single" collapsible defaultValue={`faq-0`}>
-                            <AccordionItem value={`faq-${index}`}>
+                    <Accordion type="single" collapsible>
+                        {faqs.map((faq, index) => (
+                            <AccordionItem key={index} value={`faq-${index}`}>
                                 <AccordionTrigger>
                                     <div className="flex items-start gap-3">
                                         <HelpCircle size={20} className="text-primary mt-1 shrink-0" />
@@ -58,10 +71,11 @@ export default function FAQ() {
                                     <p className="text-black/70">{faq.answer}</p>
                                 </AccordionContent>
                             </AccordionItem>
-                        </Accordion>
-                    ))}
+                        ))}
+                    </Accordion>
                 </div>
             </div>
         </div>
+        </>
     )
 }
