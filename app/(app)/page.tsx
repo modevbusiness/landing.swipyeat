@@ -9,20 +9,6 @@ import FinalCTA from "@/components/final-cta";
 import WaitlistWrapper from "@/components/waitlist-wrapper";
 import FAQ from "@/components/faq";
 
-export const metadata: Metadata = {
-  title: "SwipyEat | AI Restaurant Management & Food Ordering Platform",
-  description:
-    "SwipyEat is an all-in-one AI-powered restaurant management platform. Manage menus, POS, kitchen display, inventory, staff, and analytics in real time. Start your free 14-day trial.",
-  alternates: {
-    canonical: "https://swipyeat.com",
-  },
-  openGraph: {
-    title: "SwipyEat | AI Restaurant Management Platform",
-    description:
-      "Manage orders, staff, menus, inventory, and customer experience from one powerful platform.",
-    url: "https://swipyeat.com",
-  },
-};
 
 /* ── Structured Data (JSON-LD) ── */
 const organizationSchema = {
