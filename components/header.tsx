@@ -127,7 +127,7 @@ export default function Header() {
         <div className='md:flex hidden items-center gap-4 flex-1 justify-end'>
             <SignedOut>
                 <Link className='text-black font-medium px-4 py-2' href="/sign-in">Sign in</Link>
-                <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
+                <Link className='bg-primary text-white hover:text-primary border border-primary  font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
             </SignedOut>
             <SignedIn>
                 <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">Dashboard</Link>
@@ -147,9 +147,9 @@ export default function Header() {
                 <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">
                     <span>Pricing </span><ArrowRight className='inline-block' />
                 </Link>
-                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">
+                {/* <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">
                     <span>Docs </span><ArrowRight className='inline-block' />
-                </Link>
+                </Link> */}
                 <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">
                     <span>Contact </span><ArrowRight className='inline-block' />
                 </Link>
