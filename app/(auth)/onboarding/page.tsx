@@ -568,12 +568,14 @@ export default function OnboardingPage() {
                     // Plan icon mapping
                     const PlanIcon = isFree ? Sparkles : isUnlimited ? Zap : Crown;
                     
-                    // Price display
-                    const displayPrice = isFree 
-                      ? '0' 
-                      : billingCycle === 'yearly' 
-                        ? Math.round(plan.price_yearly / 12) 
-                        : plan.price_monthly;
+                    // True dynamic price display from Database
+                    const currentMonthlyPrice = plan.price_monthly || 0;
+                    const currentYearlyPrice = plan.price_yearly || 0;
+                    const isActuallyFree = currentMonthlyPrice === 0;
+
+                    const displayPrice = billingCycle === 'yearly' 
+                      ? Math.round(currentYearlyPrice / 12) 
+                      : currentMonthlyPrice;
 
                     // Features: try to parse from DB or use defaults
                     let features: string[] = [];
@@ -648,16 +650,16 @@ export default function OnboardingPage() {
                         <div className="mb-3">
                           <span className="text-3xl font-extrabold text-foreground">{displayPrice} MAD</span>
                           <span className="text-muted-foreground text-sm ml-1">
-                            {isFree ? `/ ${plan.trial_days || 14} days` : '/ month'}
+                            {isActuallyFree ? `/ ${plan.trial_days || 14} days` : '/ month'}
                           </span>
                         </div>
-                        {!isFree && billingCycle === 'yearly' && (
+                        {!isActuallyFree && billingCycle === 'yearly' && (
                           <p className="text-xs text-green-600 font-semibold mb-2">
-                            Billed {plan.price_yearly} MAD/year (save {Math.round((plan.price_monthly * 12) - plan.price_yearly)} MAD)
+                            Billed {currentYearlyPrice} MAD/year (save {Math.round((currentMonthlyPrice * 12) - currentYearlyPrice)} MAD)
                           </p>
                         )}
                         <p className="text-sm text-muted-foreground mb-4">
-                          {plan.description || (isFree 
+                          {plan.description || (isActuallyFree 
                             ? 'Try everything free. No credit card required.' 
                             : `Everything you need to run your restaurant digitally.`
                           )}
