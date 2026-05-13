@@ -1,31 +1,35 @@
+'use client'
+
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function FinalCTA() {
+    const { t } = useLanguage()
     return (
         <div className="bg- p-8 md:p-16" id="get-started">
             <div className="max-w-4xl mx-auto text-center">
                 <h1 className="text-primary text-xl font-mono border-b border-primary w-max mx-auto">
-                    Ready to Transform?
+                    {t.finalCta.label}
                 </h1>
                 <h2 className="text-5xl md:text-6xl font-heading py-6 text-black">
-                    Start streamlining your restaurant today
+                    {t.finalCta.title}
                 </h2>
                 <p className="text-xl text-black/70 max-w-2xl mx-auto mb-8">
-                    Join over 1,000 restaurants worldwide that have already improved their operations with SwipyEat. Set up takes less than 10 minutes.
+                    {t.finalCta.subtitle}
                 </p>
-                <Link 
+                <Link
                     className="inline-flex items-center justify-center gap-2 hover:gap-4 bg-primary text-white font-semibold py-4 px-16 text-xl hover:bg-primary/90 transition-all"
                     href="/sign-up"
                 >
-                    <span>Start Free Trial</span>
+                    <span>{t.finalCta.cta}</span>
                     <ArrowRight size={24} />
                 </Link>
 
                 <p className="text-black/60 mt-6">
-                    Already have an account?{" "}
+                    {t.finalCta.hasAccount}{" "}
                     <Link href="/sign-in" className="text-primary font-semibold hover:underline">
-                        Sign in
+                        {t.finalCta.signIn}
                     </Link>
                 </p>
             </div>

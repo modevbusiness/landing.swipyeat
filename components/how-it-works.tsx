@@ -1,93 +1,63 @@
+'use client'
+
 import { Tablet, MonitorCheck, BarChart3 } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
+const stepIcons = [Tablet, MonitorCheck, BarChart3];
+const stepImages = ["/waitersScreens.png", "/kds.png", "/analyticsDashboard.png"];
 
 export default function HowItWorks() {
-    const steps = [
-        {
-            icon: Tablet,
-            title: "Waiters Take Orders",
-            image : "/waitersScreens.png",
-            description: "Servers use tablets or mobile devices to take orders directly at the table. Orders are instantly sent to the kitchen with all special requests and modifications clearly noted.",
-            step: 1
-        },
-        {
-            icon: MonitorCheck,
-            title: "Kitchen Prepares Orders",
-            description: "Kitchen staff receives orders on the KDS in real-time. Orders are organized by priority and station, ensuring efficient preparation and timely delivery to tables.",
-            image: "/kds.png",
-            step: 2
-        },
-        {
-            icon: BarChart3,
-            title: "Management Monitors Performance",
-            description: "Restaurant owners get real-time insights into sales, inventory, and staff performance. Make data-driven decisions to optimize operations and increase profitability.",
-            image: "/analyticsDashboard.png",
-            step: 3
-        }
-    ];
-
-    const howToSchema = {
-        "@context": "https://schema.org",
-        "@type": "HowTo",
-        name: "How to Get Started with SwipyEat",
-        description: "Get your restaurant running on SwipyEat in three simple steps.",
-        step: steps.map((s) => ({
-            "@type": "HowToStep",
-            name: s.title,
-            text: s.description,
-            position: s.step,
-        })),
-    };
+    const { t } = useLanguage()
 
     return (
-        <section className="p-8 md:p-16" id="how-it-works" aria-labelledby="how-it-works-title">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
-            />
+        <div className="p-8 md:p-16" id="how-it-works">
             <div className="max-w-6xl mx-auto">
-                <span className="text-primary text-xl font-mono border-b w-max block">
-                    How It Works
-                </span>
-                <h2 id="how-it-works-title" className="text-5xl font-heading py-6">
-                    Get started in three <br /> simple steps
+                <h1 className="text-primary text-xl font-mono border-b w-max">
+                    {t.howItWorks.label}
+                </h1>
+                <h2 className="text-5xl font-heading py-6">
+                    {t.howItWorks.title}
                 </h2>
 
                 <div className="mt-12 space-y-16">
-                    {steps.map((step, index) => (
-                        <div 
-                            key={step.step}
-                            className={`flex flex-col gap-8 ${
-                                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                            } items-center`}
-                        >
-                            <div className="flex-1 space-y-4">
-                                <div className="flex items-center gap-4">
-                                    <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-heading text-2xl">
-                                        {step.step}
+                    {t.howItWorks.steps.map((step, index) => {
+                        const Icon = stepIcons[index]
+                        return (
+                            <div
+                                key={index}
+                                className={`flex flex-col gap-8 ${
+                                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                                } items-center`}
+                            >
+                                <div className="flex-1 space-y-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-heading text-2xl">
+                                            {index + 1}
+                                        </div>
+                                        <Icon className="text-primary" size={32} />
                                     </div>
-                                    <step.icon className="text-primary" size={32} />
+                                    <h3 className="text-3xl font-heading text-black">
+                                        {step.title}
+                                    </h3>
+                                    <p className="text-xl text-black/70 leading-relaxed">
+                                        {step.description}
+                                    </p>
                                 </div>
-                                <h3 className="text-3xl font-heading text-black">
-                                    {step.title}
-                                </h3>
-                                <p className="text-xl text-black/70 leading-relaxed">
-                                    {step.description}
-                                </p>
+                                <div className="flex-1">
+                                    <Image
+                                        src={stepImages[index]}
+                                        alt={step.title}
+                                        width={600}
+                                        height={400}
+                                        className="w-full h-full object-cover rounded-lg"
+                                    />
+                                </div>
                             </div>
-                            <div className="flex-1">
-                                <Image 
-                                    src={step.image} 
-                                    alt={`Step ${step.step}: ${step.title} — SwipyEat restaurant management`}
-                                    width={600}
-                                    height={400}
-                                    className="w-full h-full object-cover rounded-lg"
-                                />
-                            </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

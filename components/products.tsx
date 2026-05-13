@@ -6,8 +6,12 @@ import { useLayoutEffect, useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const productImages = ["/menuItems.png", "/ordersDashboard.png", "/kds.png"];
+const productLinks = ["/menu-builder", "/pos-system", "/kds-system"];
 
 interface CardProps {
     title: string;
@@ -35,88 +39,56 @@ function Card({ title, description, image, buttonText, buttonLink }: CardProps) 
     );
 }
 
-
 export default function Products() {
+    const { t } = useLanguage()
     const sectionRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<HTMLDivElement[]>([]);
 
-    const products = [
-        { 
-            title: "Menu Builder",
-            description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.",
-            image: "/menuItems.png",
-            buttonText: "Learn More",
-            buttonLink: "/menu-builder"
-        },
-        {
-            title: "POS System",
-            description: "Our Point of Sale (POS) system streamlines order processing, allowing your staff to quickly and accurately take orders, manage payments, and track sales.",
-            image: "/ordersDashboard.png",
-            buttonText: "Learn More",
-            buttonLink: "/pos-system"
-        },
-        {
-            title: "KDS System",
-            description: "Streamline your kitchen operations with our Kitchen Display System (KDS). Manage and prioritize orders, track preparation times, and ensure smooth communication between the front and back of house.",
-            image: "/kds.png",
-            buttonText: "Learn More",
-            buttonLink: "/kds-system"
-        }
-    ]   
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-        const cards = cardsRef.current;
+            const cards = cardsRef.current;
 
-        cards.forEach((card, i) => {
-            if (i !== 0) {
-            gsap.set(card, { yPercent: 100 });
-            }
-        });
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: `+=${cards.length * 100}%`,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-            },
-            defaults: { ease: "none" },
-        });
-
-        cards.forEach((card, i) => {
-            tl.to(card, {
-            scale: 0.9,
-            borderRadius: "12px",
+            cards.forEach((card, i) => {
+                if (i !== 0) {
+                    gsap.set(card, { yPercent: 100 });
+                }
             });
 
-            if (cards[i + 1]) {
-            tl.to(
-                cards[i + 1],
-                { yPercent: 0 },
-                "<"
-            );
-            }
-        });
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: `+=${cards.length * 100}%`,
+                    pin: true,
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                },
+                defaults: { ease: "none" },
+            });
+
+            cards.forEach((card, i) => {
+                tl.to(card, {
+                    scale: 0.9,
+                    borderRadius: "12px",
+                });
+
+                if (cards[i + 1]) {
+                    tl.to(cards[i + 1], { yPercent: 0 }, "<");
+                }
+            });
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
-    // Refresh ScrollTrigger when images load or page content changes
     useEffect(() => {
         const refreshScrollTrigger = () => {
             ScrollTrigger.refresh();
         };
 
-        // Refresh after a short delay to account for images and dynamic content
         const timeoutId = setTimeout(refreshScrollTrigger, 100);
-
-        // Listen for window resize
         window.addEventListener('resize', refreshScrollTrigger);
 
-        // Listen for image load events
         const images = document.querySelectorAll('img');
         images.forEach(img => {
             if (!img.complete) {
@@ -132,29 +104,37 @@ export default function Products() {
             });
         };
     }, []);
+
     return (
-        <section className="p-8" id="products" aria-labelledby="products-title">
-            <span className="text-primary text-xl font-mono border-b w-max block">
-                Products
-            </span>
-            <h2 id="products-title" className="text-5xl font-heading py-6">
-                Your all-in-one <br /> restaurant solution
+        <div className="p-8" id="products">
+            <h1 className="text-primary text-xl font-mono border-b w-max">
+                {t.products.label}
+            </h1>
+            <h2 className="text-5xl font-heading py-6">
+                {t.products.title}
             </h2>
             <section ref={sectionRef} className="relative h-screen overflow-hidden">
                 <div className="relative h-[90vh]">
-                    {products.map((product, i) => (
-                    <div
-                        key={product.title}
-                        ref={(el) => {
-                            if (el) cardsRef.current[i] = el;
-                        }}
-                        className="absolute   inset-0"
-                    >
-                        <Card {...product} />
-                    </div>
+                    {t.products.items.map((product, i) => (
+                        <div
+                            key={i}
+                            ref={(el) => {
+                                if (el) cardsRef.current[i] = el;
+                            }}
+                            className="absolute inset-0"
+                            style={{ transform: i !== 0 ? 'translateY(100%)' : undefined }}
+                        >
+                            <Card
+                                title={product.title}
+                                description={product.description}
+                                image={productImages[i]}
+                                buttonText={t.products.learnMore}
+                                buttonLink={productLinks[i]}
+                            />
+                        </div>
                     ))}
                 </div>
             </section>
-        </section>
+        </div>
     )
 }

@@ -1,5 +1,7 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { LanguageProvider } from "@/lib/i18n/LanguageContext";
+import BannerWrapper from "@/components/banner-wrapper";
 
 export default function Layout({
   children,
@@ -7,13 +9,13 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
-        <div className="bg-yellow-300 p-3 flex text-center text-black  justify-center items-center ">
-            Get 14 days free trial, no credit card required
-        </div>
+    <LanguageProvider>
+      <main>
+        <BannerWrapper />
         <Header />
         {children}
         <Footer />
-    </main>
+      </main>
+    </LanguageProvider>
   );
 }

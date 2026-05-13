@@ -2,53 +2,11 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import Image from "next/image";
-
-interface Testimonial {
-    name: string;
-    role: string;
-    restaurant: string;
-    content: string;
-    rating: number;
-    image: string;
-}
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function Testimonials() {
-    const testimonials: Testimonial[] = [
-        {
-            name: "Sarah Mitchell",
-            role: "Owner",
-            restaurant: "The Garden Bistro",
-            content: "SwipyEat has completely transformed how we operate. Our kitchen is more organized, our waiters are more efficient, and our customers are happier. The real-time order system eliminated so many errors.",
-            rating: 5,
-            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
-        },
-        {
-            name: "Marcus Johnson",
-            role: "General Manager",
-            restaurant: "Downtown Grill & Bar",
-            content: "We've seen a 40% reduction in order mistakes and our table turnover has increased significantly. The KDS system keeps our kitchen running like a well-oiled machine. Best investment we've made.",
-            rating: 5,
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-        },
-        {
-            name: "Elena Rodriguez",
-            role: "Chef & Owner",
-            restaurant: "Casa Moderna",
-            content: "As a chef, I love the Kitchen Display System. Orders are clearly organized by priority, and the communication with the front of house is seamless. It's like having an extra team member.",
-            rating: 5,
-            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop"
-        },
-        {
-            name: "David Chen",
-            role: "Operations Director",
-            restaurant: "Pacific Fusion",
-            content: "Managing multiple locations is so much easier with SwipyEat. The analytics and reporting features give us insights we never had before. We can make data-driven decisions to improve our service.",
-            rating: 5,
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
-        }
-    ];
-
+    const { t } = useLanguage()
+    const testimonials = t.testimonials.items
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextTestimonial = () => {
@@ -61,41 +19,16 @@ export default function Testimonials() {
 
     const current = testimonials[currentIndex];
 
-    const reviewSchema = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: "SwipyEat",
-        review: testimonials.map((t) => ({
-            "@type": "Review",
-            author: { "@type": "Person", name: t.name },
-            reviewRating: {
-                "@type": "Rating",
-                ratingValue: String(t.rating),
-                bestRating: "5",
-            },
-            reviewBody: t.content,
-        })),
-        aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "5",
-            reviewCount: String(testimonials.length),
-        },
-    };
-
     return (
-        <section className="bg-white p-8 md:p-16" id="testimonials" aria-labelledby="testimonials-title">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
-            />
+        <div className="bg-white p-8 md:p-16" id="testimonials">
             <div className="max-w-6xl mx-auto">
-                <span className="text-primary text-xl font-mono border-b w-max block">
-                    Testimonials
-                </span>
-                <h2 id="testimonials-title" className="text-5xl font-heading py-6">
-                    Loved by restaurant <br /> owners everywhere
+                <h1 className="text-primary text-xl font-mono border-b w-max">
+                    {t.testimonials.label}
+                </h1>
+                <h2 className="text-5xl font-heading py-6">
+                    {t.testimonials.title}
                 </h2>
-                
+
                 <div className="mt-12 bg-white rounded-lg relative">
                     <div className="flex flex-col md:flex-row gap-8 items-center">
                         <div className="flex-1">
@@ -105,14 +38,12 @@ export default function Testimonials() {
                                 ))}
                             </div>
                             <p className="text-2xl text-black/80 mb-6 leading-relaxed">
-                                "{current.content}"
+                                &ldquo;{current.content}&rdquo;
                             </p>
                             <div className="flex items-center gap-4">
-                                <Image 
-                                    src={current.image} 
-                                    alt={`${current.name}, ${current.role} at ${current.restaurant}`}
-                                    width={64}
-                                    height={64}
+                                <img
+                                    src={current.image}
+                                    alt={current.name}
                                     className="w-16 h-16 rounded-full object-cover"
                                 />
                                 <div>
@@ -120,7 +51,7 @@ export default function Testimonials() {
                                         {current.name}
                                     </h3>
                                     <p className="text-black/60">
-                                        {current.role} at {current.restaurant}
+                                        {current.role} {t.testimonials.at} {current.restaurant}
                                     </p>
                                 </div>
                             </div>
@@ -141,8 +72,8 @@ export default function Testimonials() {
                                     key={index}
                                     onClick={() => setCurrentIndex(index)}
                                     className={`h-2 rounded-full transition-all ${
-                                        index === currentIndex 
-                                            ? 'w-8 bg-primary' 
+                                        index === currentIndex
+                                            ? 'w-8 bg-primary'
                                             : 'w-2 bg-black/20'
                                     }`}
                                     aria-label={`Go to testimonial ${index + 1}`}
@@ -159,6 +90,6 @@ export default function Testimonials() {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 }

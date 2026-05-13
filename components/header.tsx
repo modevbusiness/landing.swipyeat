@@ -5,11 +5,13 @@ import Image from 'next/image'
 import { SignedIn, SignedOut } from '@clerk/nextjs'
 import { ChevronDown, Menu, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export default function Header() {
     const [isScrollingDown, setIsScrollingDown] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const { language, setLanguage, t } = useLanguage()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,147 +23,135 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [lastScrollY])
-    const features = [
-        {
-            title: "Digital menu",
-            elements: [
-                { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.", href: "/features#digital-menu" },
-                { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings.", href: "/features#order-management" },
-                { title: "Multimedia support", description: "Enhance your menu with images and videos of your dishes, giving customers a visual representation of what you have to offer.", href: "/features#digital-menu" },
-            ]
-        },
-        {
-            title: "Online ordering",
-            elements: [
-                { title: "Seamless ordering experience", description: "Provide your customers with a seamless online ordering experience. Allow them to browse your menu, customize their orders, and make secure payments with ease.", href: "/features#online-ordering" },
-                { title: "Order management", description: "Efficiently manage incoming orders with our intuitive order management system. Track order status, update customers, and ensure timely delivery.", href: "/features#order-management" },
-                { title: "Multiple payment options", description: "Offer a variety of payment options to cater to your customers' preferences, including credit cards, digital wallets, and more.", href: "/features#payment-processing" },
-            ]
-        },
-        {
-            title: "Table reservation",
-            elements: [
-                { title: "Easy reservation system", description: "Allow customers to easily reserve tables at your restaurant through our user-friendly reservation system. Manage reservations and optimize seating arrangements.", href: "/features#table-reservation" },
-                { title: "Real-time availability", description: "Provide real-time updates on table availability, allowing customers to make informed decisions when booking their reservations.", href: "/features#table-reservation" },
-                { title: "Reservation management", description: "Efficiently manage reservations, track customer preferences, and ensure a smooth dining experience for your guests.", href: "/features#table-reservation" },
-            ]
-        },
+
+    const features = t.header.featureGroups
+    const products = t.header.productGroups
+    const featureGroupHrefs = [
+        ['/features#digital-menu', '/features#order-management', '/features#digital-menu'],
+        ['/features#online-ordering', '/features#order-management', '/features#payment-processing'],
+        ['/features#table-reservation', '/features#table-reservation', '/features#table-reservation'],
+    ]
+    const productHrefs = [
+        ['/products#menu-builder', '/products#menu-builder', '/products#menu-builder'],
+        ['/products#pos-system', '/products#pos-system', '/products#pos-system'],
+        ['/products#kds-system', '/products#kds-system', '/products#kds-system'],
     ]
 
-    const products = [
-        { 
-            title: "Menu Builder", 
-            elements: [
-                { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.", href: "/products#menu-builder" },
-                { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings.", href: "/products#menu-builder" },
-                { title: "Multimedia support", description: "Enhance your menu with images and videos of your dishes, giving customers a visual representation of what you have to offer.", href: "/products#menu-builder" },
-            ]
-        },
-        {
-            title: "POS System",
-            elements: [
-                { title: "Streamlined order processing", description: "Our Point of Sale (POS) system streamlines order processing, allowing your staff to quickly and accurately take orders, manage payments, and track sales.", href: "/products#pos-system" },
-                { title: "Inventory management", description: "Keep track of your inventory in real-time, ensuring that you never run out of essential ingredients and supplies.", href: "/products#pos-system" },
-                { title: "Sales analytics", description: "Gain valuable insights into your sales performance with our comprehensive analytics tools, helping you make informed business decisions.", href: "/products#pos-system" },
-            ]
-        },
-        {
-            title: "KDS System",
-            elements: [
-                { title: "Efficient order management", description: "Streamline your kitchen operations with our Kitchen Display System (KDS). Manage and prioritize orders, track preparation times, and ensure smooth communication between the front and back of house.", href: "/products#kds-system" },
-                { title: "Real-time updates", description: "Receive real-time updates on order status, allowing your kitchen staff to stay informed and deliver orders promptly.", href: "/products#kds-system" },
-                { title: "Customizable interface", description: "Customize the KDS interface to fit your kitchen workflow, ensuring that your staff can easily navigate and manage orders.", href: "/products#kds-system" },
-            ]
-        }
-    ]
-  return (
-    <header className={`w-full bg-white text-white px-4 py-4 md:py-0 flex sticky top-0 z-50 items-center ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-300`}>
-        <Link onClick={() => setIsMenuOpen(false)} href="/" className='flex flex-1 items-center gap-1'>
-            <Image src="/logo.png" alt="Logo" width={100} height={60} />
-        </Link>
-        <nav className='md:flex hidden flex-1 items-center justify-center' aria-label="Main navigation">
-            <Link className='group w-max flex items-center font-medium text-black  py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
-                <span>Features </span><ChevronDown className='inline-block w-4 h-4 ml-1' />
-                <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
-                    {features.map((feature) => (
-                        <div key={feature.title} className='flex-1 p-4 w-72 border-r last:border-0 border-white/50'>
-                            <h3 className='font-medium text-white text-xl'>{feature.title}</h3>
-                            <ul className='mt-2 flex flex-col gap-2'>
-                                {feature.elements.map((element) => (
-                                    <li key={element.title}>
-                                        <Link href={element.href} className='block text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
-                                            <h4 className='font-medium'>{element.title}</h4>
-                                            <p className='opacity-60 line-clamp-1'>{element.description}</p>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
+    return (
+        <header className={`w-full bg-white text-white px-4 py-4 md:py-0 flex sticky top-0 z-50 items-center ${isScrollingDown ? '-translate-y-full' : 'translate-y-0'} transition-transform duration-300`}>
+            <Link onClick={() => setIsMenuOpen(false)} href="/" className='flex flex-1 items-center gap-1'>
+                <Image src="/logo.png" alt="Logo" width={100} height={60} />
             </Link>
-            <Link className='font-medium w-max flex items-center text-black  py-6 px-3 border-b-2 border-transparent hover:border-white box-border group' href="/products">
-                <span>Products</span><ChevronDown className='inline-block w-4 h-4 ml-1' />
-                <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
-                    {products.map((product) => (
-                        <div key={product.title} className='flex-1 p-4 w-72 border-r last:border-0 border-white/50'>
-                            <h3 className='font-medium text-white text-xl'>{product.title}</h3>
-                            <ul className='mt-2 flex flex-col gap-2'>
-                                {product.elements.map((element) => (
-                                    <li key={element.title}>
-                                        <Link href={element.href} className='block text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
-                                            <h4 className='font-medium'>{element.title}</h4>
-                                            <p className='opacity-60 line-clamp-1'>{element.description}</p>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+            <nav className='md:flex hidden flex-1 items-center justify-center'>
+                <Link className='group w-max flex items-center font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
+                    <span>{t.header.features}</span><ChevronDown className='inline-block w-4 h-4 ml-1' />
+                    <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
+                        {features.map((feature, gi) => (
+                            <div key={feature.title} className='flex-1 p-4 w-72 border-r last:border-0 border-white/50'>
+                                <h3 className='font-medium text-white text-xl'>{feature.title}</h3>
+                                <ul className='mt-2 flex flex-col gap-2'>
+                                    {feature.elements.map((element, ei) => (
+                                        <li key={element.title}>
+                                            <Link href={featureGroupHrefs[gi]?.[ei] ?? '/features'} className='block text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
+                                                <h4 className='font-medium'>{element.title}</h4>
+                                                <p className='opacity-60 line-clamp-1'>{element.description}</p>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </Link>
+                <Link className='font-medium w-max flex items-center text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border group' href="/products">
+                    <span>{t.header.products}</span><ChevronDown className='inline-block w-4 h-4 ml-1' />
+                    <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
+                        {products.map((product, gi) => (
+                            <div key={product.title} className='flex-1 p-4 w-72 border-r last:border-0 border-white/50'>
+                                <h3 className='font-medium text-white text-xl'>{product.title}</h3>
+                                <ul className='mt-2 flex flex-col gap-2'>
+                                    {product.elements.map((element, ei) => (
+                                        <li key={element.title}>
+                                            <Link href={productHrefs[gi]?.[ei] ?? '/products'} className='block text-sm text-white mt-1 hover:text-black hover:bg-white p-3 rounded-md cursor-pointer'>
+                                                <h4 className='font-medium'>{element.title}</h4>
+                                                <p className='opacity-60 line-clamp-1'>{element.description}</p>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </Link>
+                <Link className='font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">{t.header.pricing}</Link>
+                <Link className='font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">{t.header.contact}</Link>
+            </nav>
+            <div className='md:flex hidden items-center gap-4 flex-1 justify-end'>
+                {/* Language Switcher */}
+                <div className="flex items-center border border-gray-200 rounded overflow-hidden text-sm font-semibold">
+                    <button
+                        onClick={() => setLanguage('en')}
+                        className={`px-2 py-1 transition-colors ${language === 'en' ? 'bg-primary text-white' : 'text-black hover:bg-gray-100'}`}
+                    >
+                        EN
+                    </button>
+                    <button
+                        onClick={() => setLanguage('fr')}
+                        className={`px-2 py-1 transition-colors ${language === 'fr' ? 'bg-primary text-white' : 'text-black hover:bg-gray-100'}`}
+                    >
+                        FR
+                    </button>
                 </div>
-            </Link>
-            <Link className='font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">Pricing</Link>
-            {/* <Link className='font-medium text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">Docs</Link> */}
-            <Link className='font-medium text-black py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">Contact</Link>
-        </nav>
-        <div className='md:flex hidden items-center gap-4 flex-1 justify-end'>
-            <SignedOut>
-                <Link className='text-black font-medium px-4 py-2' href="/sign-in">Sign in</Link>
-                <Link className='bg-primary text-white hover:text-primary border border-primary  font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">Get Started</Link>
-            </SignedOut>
-            <SignedIn>
-                <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">Dashboard</Link>
-            </SignedIn>
-        </div>
-        <div onClick={() => setIsMenuOpen(prev => !prev)} className='md:hidden cursor-pointer'>
-                <Menu className='w-6 h-6 text-black' />
-        </div>
-        {isMenuOpen && (
-            <div className='absolute top-full left-0 w-full h-screen bg-primary text-white flex flex-col items-center py-4 md:hidden'>
-                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
-                    <span>Features </span><ArrowRight className='inline-block' />
-                </Link>
-                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/products">
-                    <span>Products </span><ArrowRight className='inline-block' />
-                </Link>
-                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">
-                    <span>Pricing </span><ArrowRight className='inline-block' />
-                </Link>
-                {/* <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/docs">
-                    <span>Docs </span><ArrowRight className='inline-block' />
-                </Link> */}
-                <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">
-                    <span>Contact </span><ArrowRight className='inline-block' />
-                </Link>
                 <SignedOut>
-                    <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/sign-in">Sign in</Link>
-                    <Link onClick={() => setIsMenuOpen(prev => !prev)} className='font-medium flex items-center justify-between text-xl w-full bg-white text-primary hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/sign-up">Get Started</Link>
+                    <Link className='text-black font-medium px-4 py-2' href="/sign-in">{t.header.signIn}</Link>
+                    <Link className='bg-primary text-white hover:text-primary border border-primary font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/sign-up">{t.header.getStarted}</Link>
                 </SignedOut>
                 <SignedIn>
-                    <Link onClick={() => setIsMenuOpen(prev => !prev)} className='font-medium flex items-center justify-between text-xl w-full bg-white text-primary hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/dashboard">Dashboard</Link>
+                    <Link className='bg-primary text-white font-medium px-4 py-2 rounded-full hover:bg-white/90' href="/dashboard">{t.header.dashboard}</Link>
                 </SignedIn>
             </div>
-        )}
-    </header>
-  )
+            <div onClick={() => setIsMenuOpen(prev => !prev)} className='md:hidden cursor-pointer'>
+                <Menu className='w-6 h-6 text-black' />
+            </div>
+            {isMenuOpen && (
+                <div className='absolute top-full left-0 w-full h-screen bg-primary text-white flex flex-col items-center py-4 md:hidden'>
+                    {/* Mobile Language Switcher */}
+                    <div className="flex items-center gap-2 py-4 w-full px-3 border-b border-white/20">
+                        <span className="text-white/70 text-sm">{language === 'en' ? 'Language' : 'Langue'} :</span>
+                        <button
+                            onClick={() => setLanguage('en')}
+                            className={`px-3 py-1 rounded text-sm font-semibold transition-colors ${language === 'en' ? 'bg-white text-primary' : 'text-white/70 hover:text-white'}`}
+                        >
+                            EN
+                        </button>
+                        <button
+                            onClick={() => setLanguage('fr')}
+                            className={`px-3 py-1 rounded text-sm font-semibold transition-colors ${language === 'fr' ? 'bg-white text-primary' : 'text-white/70 hover:text-white'}`}
+                        >
+                            FR
+                        </button>
+                    </div>
+                    <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
+                        <span>{t.header.features}</span><ArrowRight className='inline-block' />
+                    </Link>
+                    <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/products">
+                        <span>{t.header.products}</span><ArrowRight className='inline-block' />
+                    </Link>
+                    <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/pricing">
+                        <span>{t.header.pricing}</span><ArrowRight className='inline-block' />
+                    </Link>
+                    <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/company/contact">
+                        <span>{t.header.contact}</span><ArrowRight className='inline-block' />
+                    </Link>
+                    <SignedOut>
+                        <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/sign-in">{t.header.signIn}</Link>
+                        <Link onClick={() => setIsMenuOpen(prev => !prev)} className='font-medium flex items-center justify-between text-xl w-full bg-white text-primary hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/sign-up">{t.header.getStarted}</Link>
+                    </SignedOut>
+                    <SignedIn>
+                        <Link onClick={() => setIsMenuOpen(prev => !prev)} className='font-medium flex items-center justify-between text-xl w-full bg-white text-primary hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/dashboard">{t.header.dashboard}</Link>
+                    </SignedIn>
+                </div>
+            )}
+        </header>
+    )
 }
