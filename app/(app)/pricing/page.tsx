@@ -57,7 +57,7 @@ export default function PricingPage() {
         },
         {
             name: "Unlimited",
-            monthlyPrice: 1790,
+            monthlyPrice: 1399,
             description: "For restaurant chains and enterprises with extensive needs",
             features: [
                 "Unlimited devices",
@@ -224,7 +224,7 @@ export default function PricingPage() {
                                         : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'
                                 }`}
                             >
-                                <span>{tier.name} — {calculatePrice(tier.monthlyPrice)}Dh/mo</span>
+                                <span>{tier.name} — {tier.monthlyPrice}Dh/mo</span>
                                 <ArrowRight size={20} />
                             </Link>
                         ))}

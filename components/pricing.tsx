@@ -41,7 +41,7 @@ export default function Pricing() {
             name: "Premium",
             monthlyPrice: 899,
             yearlyTotal: 8999,
-            yearlySavings: 789,
+            yearlySavings: 1789,
             description: "Ideal for growing restaurants with multiple staff members.",
             features: [
                 "Up to 15 devices",
@@ -60,9 +60,9 @@ export default function Pricing() {
         },
         {
             name: "Unlimited",
-            monthlyPrice: 999,
-            yearlyTotal: 11000,
-            yearlySavings: 600,
+            monthlyPrice: 1399,
+            yearlyTotal: 13990,
+            yearlySavings: 2798,
             description: "For restaurant chains and businesses with extensive needs.",
             features: [
                 "Unlimited devices",
