@@ -23,12 +23,12 @@ export default function Stats() {
     ];
 
     return (
-        <div className="bg-primary p-8 md:p-16" id="stats">
+        <section className="bg-primary p-8 md:p-16" id="stats" aria-labelledby="stats-title">
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-white text-xl font-mono border-b border-white/30 w-max">
+                <span className="text-white text-xl font-mono border-b border-white/30 w-max block">
                     By the Numbers
-                </h1>
-                <h2 className="text-5xl font-heading py-6 text-white">
+                </span>
+                <h2 id="stats-title" className="text-5xl font-heading py-6 text-white">
                     Proven results that <br /> speak for themselves
                 </h2>
 
@@ -51,6 +51,6 @@ export default function Stats() {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

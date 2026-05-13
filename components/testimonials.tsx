@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import Image from "next/image";
 
 interface Testimonial {
     name: string;
@@ -60,13 +61,38 @@ export default function Testimonials() {
 
     const current = testimonials[currentIndex];
 
+    const reviewSchema = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: "SwipyEat",
+        review: testimonials.map((t) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: t.name },
+            reviewRating: {
+                "@type": "Rating",
+                ratingValue: String(t.rating),
+                bestRating: "5",
+            },
+            reviewBody: t.content,
+        })),
+        aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "5",
+            reviewCount: String(testimonials.length),
+        },
+    };
+
     return (
-        <div className="bg-white p-8 md:p-16" id="testimonials">
+        <section className="bg-white p-8 md:p-16" id="testimonials" aria-labelledby="testimonials-title">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+            />
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-primary text-xl font-mono border-b w-max">
+                <span className="text-primary text-xl font-mono border-b w-max block">
                     Testimonials
-                </h1>
-                <h2 className="text-5xl font-heading py-6">
+                </span>
+                <h2 id="testimonials-title" className="text-5xl font-heading py-6">
                     Loved by restaurant <br /> owners everywhere
                 </h2>
                 
@@ -82,9 +108,11 @@ export default function Testimonials() {
                                 "{current.content}"
                             </p>
                             <div className="flex items-center gap-4">
-                                <img 
+                                <Image 
                                     src={current.image} 
-                                    alt={current.name}
+                                    alt={`${current.name}, ${current.role} at ${current.restaurant}`}
+                                    width={64}
+                                    height={64}
                                     className="w-16 h-16 rounded-full object-cover"
                                 />
                                 <div>
@@ -131,6 +159,6 @@ export default function Testimonials() {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

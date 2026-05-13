@@ -23,7 +23,7 @@ export default function Header() {
     }, [lastScrollY])
     const features = [
         {
-            title: "Degital menu",
+            title: "Digital menu",
             elements: [
                 { title: "Create and customize your menu", description: "Easily create and customize your digital menu with our user-friendly interface. Add your dishes, descriptions, and prices to showcase your offerings.", href: "/features#digital-menu" },
                 { title: "Real-time updates", description: "Make instant updates to your menu, ensuring that your customers always have access to the latest information about your offerings.", href: "/features#order-management" },
@@ -79,9 +79,9 @@ export default function Header() {
         <Link onClick={() => setIsMenuOpen(false)} href="/" className='flex flex-1 items-center gap-1'>
             <Image src="/logo.png" alt="Logo" width={100} height={60} />
         </Link>
-        <nav className='md:flex hidden flex-1 items-center justify-center'>
+        <nav className='md:flex hidden flex-1 items-center justify-center' aria-label="Main navigation">
             <Link className='group w-max flex items-center font-medium text-black  py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
-                <span>Feautures </span><ChevronDown className='inline-block w-4 h-4 ml-1' />
+                <span>Features </span><ChevronDown className='inline-block w-4 h-4 ml-1' />
                 <div className='absolute top-full w-full left-1/2 -translate-x-1/2 bg-primary border-y group-hover:flex hidden border-white/50'>
                     {features.map((feature) => (
                         <div key={feature.title} className='flex-1 p-4 w-72 border-r last:border-0 border-white/50'>
@@ -139,7 +139,7 @@ export default function Header() {
         {isMenuOpen && (
             <div className='absolute top-full left-0 w-full h-screen bg-primary text-white flex flex-col items-center py-4 md:hidden'>
                 <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/features">
-                    <span>Feautures </span><ArrowRight className='inline-block' />
+                    <span>Features </span><ArrowRight className='inline-block' />
                 </Link>
                 <Link onClick={() => setIsMenuOpen(false)} className='font-medium flex items-center justify-between text-xl w-full text-white/80 hover:text-white py-6 px-3 border-b-2 border-transparent hover:border-white box-border' href="/products">
                     <span>Products </span><ArrowRight className='inline-block' />

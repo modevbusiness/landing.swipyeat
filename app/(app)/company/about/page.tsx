@@ -2,6 +2,18 @@ import { ArrowRight, Target, Eye, Heart, Users, Globe, Award } from "lucide-reac
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+    title: "About SwipyEat — AI Restaurant Management Platform",
+    description: "Learn about SwipyEat — our mission, team, milestones, and how we build AI-powered restaurant management tools used by thousands of restaurants worldwide.",
+    keywords: ["swipyeat","about swipyeat","restaurant management","restaurant software","kds","pos","ai restaurant platform","restaurant operations"],
+    openGraph: {
+        title: "About SwipyEat — AI Restaurant Management Platform",
+        description: "Learn about SwipyEat — our mission, team, milestones, and how we build AI-powered restaurant management tools used by thousands of restaurants worldwide.",
+        url: "https://swipyeat.com/company/about",
+        images: ["/og-image.png"],
+    },
+};
+
 export default function AboutPage() {
     const values = [
         {

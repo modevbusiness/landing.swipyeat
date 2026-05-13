@@ -26,13 +26,30 @@ export default function HowItWorks() {
         }
     ];
 
+    const howToSchema = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: "How to Get Started with SwipyEat",
+        description: "Get your restaurant running on SwipyEat in three simple steps.",
+        step: steps.map((s) => ({
+            "@type": "HowToStep",
+            name: s.title,
+            text: s.description,
+            position: s.step,
+        })),
+    };
+
     return (
-        <div className="p-8 md:p-16" id="how-it-works">
+        <section className="p-8 md:p-16" id="how-it-works" aria-labelledby="how-it-works-title">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+            />
             <div className="max-w-6xl mx-auto">
-                <h1 className="text-primary text-xl font-mono border-b w-max">
+                <span className="text-primary text-xl font-mono border-b w-max block">
                     How It Works
-                </h1>
-                <h2 className="text-5xl font-heading py-6">
+                </span>
+                <h2 id="how-it-works-title" className="text-5xl font-heading py-6">
                     Get started in three <br /> simple steps
                 </h2>
 
@@ -61,7 +78,7 @@ export default function HowItWorks() {
                             <div className="flex-1">
                                 <Image 
                                     src={step.image} 
-                                    alt={step.title}
+                                    alt={`Step ${step.step}: ${step.title} — SwipyEat restaurant management`}
                                     width={600}
                                     height={400}
                                     className="w-full h-full object-cover rounded-lg"
@@ -71,6 +88,6 @@ export default function HowItWorks() {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

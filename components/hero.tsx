@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function Hero() {
   return (
-    <div className='bg-[#ff4d00] min-h-screen flex flex-col justify-center gap-16'>
+    <section aria-label="Hero" className='bg-[#ff4d00] min-h-screen flex flex-col justify-center gap-16'>
       <div className="flex flex-col md:flex-row items-center ">
         <div className='flex-1 md:p-8 p-4'>
           <h1 className="font-heading text-3xl md:text-6xl text-white">Fewer mistakes. Faster service. Happier customers.</h1>
@@ -16,15 +16,15 @@ export default function Hero() {
           </Link>
         </div>
         <div className='flex-1'>
-          <Image src="/img-hero.png" alt="Hero Image" width={700} height={100} className="object-cover h-full rounded-r" />
+          <Image src="/img-hero.png" alt="SwipyEat restaurant management dashboard showing real-time order tracking and kitchen display" width={700} height={100} className="object-cover h-full rounded-r" priority />
         </div>
       </div>
       <div className='flex flex-col md:flex-row justify-between items-center md:p-8 p-4'>
-        <h1 className='font-mono uppercase md:text-2xl text-white'>Trusted by over 1,000 <br />restaurants worldwide</h1>
+        <p className='font-mono uppercase md:text-2xl text-white'>Trusted by over 1,000 <br />restaurants worldwide</p>
         <div>
-          <Image src="/trusted.png" alt="Logos" width={600} height={5} />
+          <Image src="/trusted.png" alt="Logos of restaurants and businesses trusting SwipyEat for their operations" width={600} height={5} />
         </div>
       </div>
-    </div>
+    </section>
   )
 }

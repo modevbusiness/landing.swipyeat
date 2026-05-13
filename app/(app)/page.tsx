@@ -1,47 +1,84 @@
-'use client';
-
+import type { Metadata } from "next";
 import Hero from "@/components/hero";
 import Products from "@/components/products";
-import Feautures from "@/components/feautures";
 import HowItWorks from "@/components/how-it-works";
 import Pricing from "@/components/pricing";
 import Stats from "@/components/stats";
 import Testimonials from "@/components/testimonials";
 import FinalCTA from "@/components/final-cta";
-import WaitlistForm from "@/components/waitlist";
-import { useEffect, useState } from "react";
+import WaitlistWrapper from "@/components/waitlist-wrapper";
+import FAQ from "@/components/faq";
+
+
+/* ── Structured Data (JSON-LD) ── */
+const organizationSchema = {
+  "@type": "Organization",
+  "@id": "https://swipyeat.com/#organization",
+  name: "SwipyEat",
+  url: "https://swipyeat.com",
+  logo: "https://swipyeat.com/logo.svg",
+  description:
+    "AI-powered restaurant management platform for menus, POS, KDS, inventory, and analytics.",
+  sameAs: ["https://instagram.com/swipy.eat"],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      areaServed: "Worldwide",
+    },
+  ],
+};
+
+const webSiteSchema = {
+  "@type": "WebSite",
+  "@id": "https://swipyeat.com/#website",
+  url: "https://swipyeat.com",
+  name: "SwipyEat",
+  publisher: { "@id": "https://swipyeat.com/#organization" },
+};
+
+const softwareAppSchema = {
+  "@type": "SoftwareApplication",
+  name: "SwipyEat",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description:
+    "All-in-one restaurant management software with menu builder, POS, kitchen display system, and analytics.",
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "416",
+    highPrice: "999",
+    priceCurrency: "MAD",
+    offerCount: "3",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "1000",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [organizationSchema, webSiteSchema, softwareAppSchema],
+};
 
 export default function Home() {
-  const [showWaitlist, setShowWaitlist] = useState(false);
-  useEffect(() => {
-    const waitlistShown = localStorage.getItem('waitlistShown');
-    if (!waitlistShown) {
-      setShowWaitlist(true);
-    }
-  }, []);
-
-  const handleClose = () => {
-    localStorage.setItem('waitlistShown', 'true');
-    setShowWaitlist(false);
-  };
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
-      {/* DUPLICATE: This quote is identical to the Hero subtitle — commented out to avoid repetition */}
-      {/* <div className="p-8" id="why-us">
-        <h1 className="text-primary text-xl font-mono py-1 w-max border-b">Why SwipyEat?</h1>
-        <h1 className="text-black text-2xl md:text-5xl font-heading py-4">"SwipyEat brings waiters, kitchen staff, and management together in one real-time system to streamline ordering, improve kitchen flow, and keep service running smoothly."</h1>
-      </div> */}
-      {/* DUPLICATE: Features and HowItWorks cover the same 3 topics (orders, KDS, analytics) with the same images.
-          Consider keeping only one. HowItWorks is kept as it has a clearer step-by-step narrative. */}
-      {/* <Feautures /> */}
       <HowItWorks />
       <Products />
       <Pricing />
+      <FAQ />
       <Stats />
       <Testimonials />
       <FinalCTA />
-      {showWaitlist && <WaitlistForm  onClose={() => setShowWaitlist(false)} onSubmit={() => handleClose()} />}
+      <WaitlistWrapper />
     </div>
   );
 }
