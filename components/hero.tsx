@@ -23,12 +23,6 @@ export default function Hero() {
           <Image src="/img-hero.png" alt="Hero Image" width={700} height={100} className="object-cover h-full rounded-r" />
         </div>
       </div>
-      <div className='flex flex-col md:flex-row justify-between items-center md:p-8 p-4'>
-        <h1 className='font-mono uppercase md:text-2xl text-white'>{t.hero.trustedBy}</h1>
-        <div>
-          <Image src="/trusted.png" alt="Logos" width={600} height={5} />
-        </div>
-      </div>
     </div>
   )
 }

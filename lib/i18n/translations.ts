@@ -546,8 +546,7 @@ const en = {
     subtitle: "Whether you have a question about our products, pricing, or anything else — our team is ready to help.",
     info: [
       { title: "Email Us", description: "Our team typically responds within 24 hours.", value: "swipyeat@gmail.com" },
-      { title: "Call Us", description: "Mon-Fri, 9AM to 6PM (CET).", value: "+1 (555) 123-4567" },
-      { title: "Visit Us", description: "Our headquarters in Paris.", value: "42 Rue de la Tech, 75001 Paris, France" },
+      { title: "Call Us", description: "Mon-Fri, 9AM to 6PM (CET).", value: "+212 6 87 91 02 42" },
       { title: "Business Hours", description: "We're available during these times.", value: "Mon–Fri: 9AM–6PM CET" },
     ],
     form: {
@@ -579,9 +578,9 @@ const en = {
       label: "Departments",
       title: "Reach the right team",
       items: [
-        { title: "Customer Support", description: "Need help with your account or have a technical question?", email: "support@swipyeat.com" },
-        { title: "Sales", description: "Interested in SwipyEat for your restaurant? Let's talk.", email: "sales@swipyeat.com" },
-        { title: "Press & Media", description: "Journalist or blogger? Get press kits and media inquiries.", email: "press@swipyeat.com" },
+        { title: "Customer Support", description: "Need help with your account or have a technical question?", email: "swipyeat@gmail.com" },
+        { title: "Sales", description: "Interested in SwipyEat for your restaurant? Let's talk.", email: "swipyeat@gmail.com" },
+        { title: "Press & Media", description: "Journalist or blogger? Get press kits and media inquiries.", email: "swipyeat@gmail.com" },
       ],
     },
     ctaTitle: "Ready to get started?",

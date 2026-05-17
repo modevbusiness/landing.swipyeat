@@ -45,8 +45,8 @@ export default function ContactPage() {
 
             {/* Contact Info Cards */}
             <div id="contact-info">
-                <div className="w-full">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                <div className="w-full ">
+                    <div className="grid grid-cols-1  md:grid-cols-3">
                         {cp.info.map((info, i) => {
                             const Icon = infoIcons[i]
                             return (

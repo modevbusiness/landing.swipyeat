@@ -122,7 +122,6 @@ export default function Products() {
                                 if (el) cardsRef.current[i] = el;
                             }}
                             className="absolute inset-0"
-                            style={{ transform: i !== 0 ? 'translateY(100%)' : undefined }}
                         >
                             <Card
                                 title={product.title}
