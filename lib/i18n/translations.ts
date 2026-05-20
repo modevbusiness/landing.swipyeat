@@ -753,7 +753,6 @@ const fr: typeof en = {
         features: [
           "Jusqu'à 5 appareils",
           "Créateur de menu basique",
-          "Système de caisse (POS)",
           "Support par email",
           "Analyses basiques",
           "1 établissement",
