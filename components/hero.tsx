@@ -8,7 +8,7 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 export default function Hero() {
   const { t } = useLanguage()
   return (
-    <div className='bg-[#ff4d00] min-h-screen flex flex-col justify-center gap-16'>
+    <div className='bg-[#ff4d00] min-h-[calc(100vh-80px)] flex flex-col justify-center gap-16'>
       <div className="flex flex-col md:flex-row items-center ">
         <div className='flex-1 md:p-8 p-4'>
           <h1 className="font-heading text-3xl md:text-6xl text-white">{t.hero.title}</h1>
