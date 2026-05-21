@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="flex flex-col md:flex-row items-center ">
         <div className='flex-1 md:p-8 p-4'>
           <h1 className="font-heading text-3xl md:text-6xl text-white">{t.hero.title}</h1>
-          <p className='text-white mt-6 text-sm md:text-lg max-w-xl'>
+          <p className='text-white mt-6 text-[17px] md:text-[18px] max-w-xl'>
             {t.hero.subtitle}
           </p>
           <Link className='flex bg-white items-center justify-center w-max gap-2 hover:gap-3 mt-6 text-primary font-semibold py-3 px-12 text-xl transition-all' href="/sign-in">

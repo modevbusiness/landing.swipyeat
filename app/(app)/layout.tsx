@@ -11,7 +11,6 @@ export default function Layout({
   return (
     <LanguageProvider>
       <main>
-        <BannerWrapper />
         <Header />
         {children}
         <Footer />
