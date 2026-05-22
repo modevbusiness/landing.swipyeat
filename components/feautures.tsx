@@ -1,58 +1,92 @@
 'use client';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import { useState } from "react";
 import Image from "next/image";
+import { Zap, Monitor, BarChart3, LayoutGrid } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-export default function Feautures() {
-    const features = [
-        {
-            title: "Real-Time Order Management",
-            description: "Our system allows waiters to take orders directly on their devices, which are instantly sent to the kitchen. This real-time communication ensures that orders are processed quickly and accurately, reducing wait times and improving customer satisfaction.",
-            image: "/orders.png"
-        },
-        {
-            title: "Kitchen Display System (KDS)",
-            image: "/kds.png",
-            description: "The KDS provides kitchen staff with a clear and organized view of incoming orders, allowing them to prioritize and manage their workflow efficiently. This helps to streamline kitchen operations and ensure that meals are prepared and delivered in a timely manner.",
-        },
-        {
-            title: "Comprehensive Management Tools",
-            description: "Our platform offers a suite of management tools that provide insights into sales, inventory, and staff performance. This data-driven approach helps restaurant owners make informed decisions to optimize their operations and enhance profitability.",
-            image: "/analyticsDashboard.png"
-        },
-        {
-            title: "Table Management",
-            description: "Efficiently manage table assignments, reservations, and status tracking. Optimize seating arrangements and reduce customer wait times with real-time table availability.",
-            image: "/ordersDashboard.png"
-        },
-        
-        
-    ]
-    const [selectedFeature, setSelectedFeature] = useState(0);
+const featureIcons = [Zap, Monitor, BarChart3, LayoutGrid];
+const featureImages = ["/orders.png", "/kds.png", "/analyticsDashboard.png", "/ordersDashboard.png"];
+
+export default function Features() {
+    const { t } = useLanguage();
+    const [selected, setSelected] = useState(0);
+
     return (
-        <div className="p-8 flex h-max items-center" id="features">
-            <div className="flex-1">
-                <Accordion type="single" className="md:p-5" collapsible={false} value={`item-${selectedFeature}`} onValueChange={(value) => setSelectedFeature(Number(value.split("-")[1]))}>
-                    {features.map((feature, i) => (
-                        <AccordionItem value={`item-${i}`} key={i} className="border-b cursor-pointer">
-                            <AccordionTrigger className="text-left text-2xl font-heading cursor-pointer no-underline hover:no-underline">{feature.title}</AccordionTrigger>
-                            <AccordionContent className="text-lg text-black/70">
-                                <p>{feature.description}</p>
-                                <Image src={feature.image} alt={feature.title} width={600} height={400} className="w-full h-full md:hidden object-cover rounded-md bg-gray-200" />
-                            </AccordionContent>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
-            </div>
-            <div className="flex-1 h-full w-full bg-gray-200 rounded-md md:block hidden">
-                <Image src={features[selectedFeature].image} alt={features[selectedFeature].title} width={600} height={400} className="w-full h-full object-cover rounded bg-gray-100" />
+        <div className="p-8 md:p-16" id="features">
+            <div className="max-w-6xl mx-auto">
+                <h1 className="text-primary text-xl font-mono border-b w-max">
+                    {t.features.label}
+                </h1>
+                <h2 className="text-5xl font-heading py-6">
+                    {t.features.title}
+                </h2>
+
+                <div className="mt-8 flex flex-col md:flex-row gap-8 items-start">
+                    {/* Left: feature list */}
+                    <div className="flex-1 space-y-2">
+                        {t.features.items.map((feature, i) => {
+                            const Icon = featureIcons[i];
+                            const isActive = selected === i;
+                            return (
+                                <div
+                                    key={i}
+                                    onClick={() => setSelected(i)}
+                                    className={`cursor-pointer p-6 rounded-lg border-l-4 transition-all duration-200 ${
+                                        isActive
+                                            ? 'border-primary bg-primary/5'
+                                            : 'border-transparent hover:border-primary/30 hover:bg-gray-50'
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                                            isActive ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
+                                        }`}>
+                                            <Icon size={20} />
+                                        </div>
+                                        <h3 className={`text-xl font-heading transition-colors ${
+                                            isActive ? 'text-primary' : 'text-black'
+                                        }`}>
+                                            {feature.title}
+                                        </h3>
+                                    </div>
+
+                                    {isActive && (
+                                        <>
+                                            <p className="mt-4 text-black/70 text-lg leading-relaxed pl-14">
+                                                {feature.description}
+                                            </p>
+                                            <div className="mt-6 md:hidden rounded-xl overflow-hidden bg-gray-100">
+                                                <Image
+                                                    src={featureImages[i]}
+                                                    alt={feature.title}
+                                                    width={600}
+                                                    height={400}
+                                                    className="w-full object-cover"
+                                                />
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Right: image (desktop only) */}
+                    <div className="flex-1 hidden md:block sticky top-24">
+                        <div className="rounded-xl overflow-hidden bg-gray-100 aspect-4/3">
+                            <Image
+                                key={selected}
+                                src={featureImages[selected]}
+                                alt={t.features.items[selected].title}
+                                width={600}
+                                height={400}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    )
+    );
 }

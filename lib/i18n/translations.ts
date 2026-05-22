@@ -124,6 +124,29 @@ const en = {
     ],
   },
 
+  features: {
+    label: "Features",
+    title: "Everything you need to run your restaurant",
+    items: [
+      {
+        title: "Real-Time Order Management",
+        description: "Waiters take orders directly on their devices and instantly send them to the kitchen. Reduce errors, cut wait times, and keep service flowing smoothly at every table.",
+      },
+      {
+        title: "Kitchen Display System (KDS)",
+        description: "Kitchen staff get a clear, organized view of every incoming order. Prioritize by urgency, route to the right station, and prepare meals faster with zero paper tickets.",
+      },
+      {
+        title: "Analytics & Management Tools",
+        description: "Track sales trends, inventory levels, and staff performance from one powerful dashboard. Make data-driven decisions to boost efficiency and grow your revenue.",
+      },
+      {
+        title: "Table Management",
+        description: "Manage table assignments, track reservations, and monitor seat availability in real time. Optimize your floor layout and reduce customer wait times effortlessly.",
+      },
+    ],
+  },
+
   products: {
     label: "Products",
     title: "Your all-in-one restaurant solution",
@@ -205,6 +228,29 @@ const en = {
         buttonText: "Get Started",
       },
     ],
+    customPlan: {
+      badge: "BUILD YOUR OWN",
+      name: "Custom",
+      description: "Pick only the services you need. Your price is calculated automatically based on your selection — no locked-in bundles.",
+      selectLabel: "Choose your services",
+      summaryLabel: "Your selection",
+      totalMonthly: "Monthly total",
+      totalYearly: "Yearly total",
+      saveLabel: (pct: number) => `Save ${pct}% with yearly billing`,
+      emptyState: "Select at least one service to see your price.",
+      buttonText: "Build My Plan",
+      buttonEmpty: "Select a Service",
+      services: [
+        { name: "Menu Builder", description: "Digital menu creation & real-time updates", price: 149 },
+        { name: "POS System", description: "Point of sale & payment processing", price: 199 },
+        { name: "KDS System", description: "Kitchen display & order routing", price: 149 },
+        { name: "Table Management", description: "Reservations & table tracking", price: 99 },
+        { name: "Analytics", description: "Sales reports & business insights", price: 149 },
+        { name: "Online Ordering", description: "Branded online storefront", price: 199 },
+        { name: "Inventory", description: "Stock tracking & low-stock alerts", price: 99 },
+        { name: "Staff Tools", description: "Clock-ins, roles & permissions", price: 99 },
+      ],
+    },
   },
 
   stats: {
@@ -714,6 +760,29 @@ const fr: typeof en = {
     ],
   },
 
+  features: {
+    label: "Fonctionnalités",
+    title: "Tout ce dont vous avez besoin pour gérer votre restaurant",
+    items: [
+      {
+        title: "Gestion des commandes en temps réel",
+        description: "Les serveurs prennent les commandes sur leurs appareils et les envoient instantanément en cuisine. Réduisez les erreurs, diminuez les temps d'attente et maintenez un service fluide à chaque table.",
+      },
+      {
+        title: "Système d'affichage cuisine (KDS)",
+        description: "Le personnel de cuisine dispose d'une vue claire et organisée de chaque commande entrante. Priorisez par urgence, acheminez vers la bonne station et préparez les repas plus vite sans tickets papier.",
+      },
+      {
+        title: "Analyses et outils de gestion",
+        description: "Suivez les tendances des ventes, les niveaux de stock et les performances du personnel depuis un tableau de bord puissant. Prenez des décisions basées sur les données pour améliorer l'efficacité et augmenter vos revenus.",
+      },
+      {
+        title: "Gestion des tables",
+        description: "Gérez les attributions de tables, suivez les réservations et surveillez la disponibilité des places en temps réel. Optimisez l'agencement de votre salle et réduisez les temps d'attente des clients sans effort.",
+      },
+    ],
+  },
+
   products: {
     label: "Produits",
     title: "Votre solution tout-en-un pour restaurant",
@@ -794,6 +863,29 @@ const fr: typeof en = {
         buttonText: "Commencer",
       },
     ],
+    customPlan: {
+      badge: "CRÉEZ LE VÔTRE",
+      name: "Personnalisé",
+      description: "Choisissez uniquement les services dont vous avez besoin. Votre prix est calculé automatiquement selon votre sélection — aucun forfait imposé.",
+      selectLabel: "Choisissez vos services",
+      summaryLabel: "Votre sélection",
+      totalMonthly: "Total mensuel",
+      totalYearly: "Total annuel",
+      saveLabel: (pct: number) => `Économisez ${pct}% avec la facturation annuelle`,
+      emptyState: "Sélectionnez au moins un service pour voir votre prix.",
+      buttonText: "Créer mon plan",
+      buttonEmpty: "Choisir un service",
+      services: [
+        { name: "Créateur de menu", description: "Création de menu numérique & mises à jour en temps réel", price: 149 },
+        { name: "Système de caisse", description: "Point de vente & traitement des paiements", price: 199 },
+        { name: "Système KDS", description: "Affichage cuisine & routage des commandes", price: 149 },
+        { name: "Gestion des tables", description: "Réservations & suivi des tables", price: 99 },
+        { name: "Analyses", description: "Rapports de ventes & informations commerciales", price: 149 },
+        { name: "Commande en ligne", description: "Vitrine en ligne personnalisée", price: 199 },
+        { name: "Inventaire", description: "Suivi des stocks & alertes de rupture", price: 99 },
+        { name: "Outils RH", description: "Pointages, rôles & permissions", price: 99 },
+      ],
+    },
   },
 
   stats: {

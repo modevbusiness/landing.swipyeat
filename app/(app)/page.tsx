@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/components/hero";
 import Products from "@/components/products";
 import HowItWorks from "@/components/how-it-works";
+import Features from "@/components/feautures";
 import Pricing from "@/components/pricing";
 import Stats from "@/components/stats";
 import Testimonials from "@/components/testimonials";
@@ -72,6 +73,7 @@ export default function Home() {
       />
       <Hero />
       <HowItWorks />
+      <Features />
       <Products />
       <Pricing />
       <FAQ />
