@@ -53,7 +53,7 @@ const productSchema = {
     {
       "@type": "Offer",
       name: "Unlimited",
-      price: "1790",
+      price: "1399",
       priceCurrency: "MAD",
       priceValidUntil: "2027-12-31",
       availability: "https://schema.org/InStock",

@@ -7,7 +7,7 @@ import Pricing from "@/components/pricing";
 import FAQ from "@/components/faq";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const tierMonthlyPrices = [499, 899, 1790];
+const tierMonthlyPrices = [499, 899, 1399];
 const tierButtonLinks = ["/sign-up?plan=standard", "/sign-up?plan=premium", "/sign-up?plan=unlimited"];
 const tierHighlighted = [false, true, false];
 
